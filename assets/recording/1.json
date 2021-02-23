@@ -1,0 +1,190 @@
+{
+    "header": {
+        "keySignatures": [
+            {
+                "key": "C",
+                "scale": "major",
+                "ticks": 0
+            }
+        ],
+        "meta": [],
+        "name": "",
+        "ppq": 1024,
+        "tempos": [
+            {
+                "bpm": 192,
+                "ticks": 0
+            }
+        ],
+        "timeSignatures": [
+            {
+                "ticks": 0,
+                "timeSignature": [
+                    4,
+                    4
+                ],
+                "measures": 0
+            }
+        ]
+    },
+    "tracks": [
+        {
+            "channel": 0,
+            "controlChanges": {},
+            "pitchBends": [],
+            "instrument": {
+                "family": "piano",
+                "name": "acoustic grand piano",
+                "number": 0
+            },
+            "name": "harmony:Piano Full Voicing",
+            "notes": [
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 48,
+                    "name": "C3",
+                    "ticks": 0,
+                    "time": 0,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 55,
+                    "name": "G3",
+                    "ticks": 0,
+                    "time": 0,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 60,
+                    "name": "C4",
+                    "ticks": 0,
+                    "time": 0,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 64,
+                    "name": "E4",
+                    "ticks": 0,
+                    "time": 0,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 50,
+                    "name": "D3",
+                    "ticks": 4096,
+                    "time": 1.25,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 57,
+                    "name": "A3",
+                    "ticks": 4096,
+                    "time": 1.25,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 60,
+                    "name": "C4",
+                    "ticks": 4096,
+                    "time": 1.25,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 65,
+                    "name": "F4",
+                    "ticks": 4096,
+                    "time": 1.25,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 40,
+                    "name": "E2",
+                    "ticks": 8192,
+                    "time": 2.5,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 48,
+                    "name": "C3",
+                    "ticks": 8192,
+                    "time": 2.5,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 55,
+                    "name": "G3",
+                    "ticks": 8192,
+                    "time": 2.5,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 60,
+                    "name": "C4",
+                    "ticks": 8192,
+                    "time": 2.5,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 41,
+                    "name": "F2",
+                    "ticks": 12288,
+                    "time": 3.75,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 57,
+                    "name": "A3",
+                    "ticks": 12288,
+                    "time": 3.75,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 60,
+                    "name": "C4",
+                    "ticks": 12288,
+                    "time": 3.75,
+                    "velocity": 0.4015748031496063
+                },
+                {
+                    "duration": 1.2493896484375,
+                    "durationTicks": 4094,
+                    "midi": 65,
+                    "name": "F4",
+                    "ticks": 12288,
+                    "time": 3.75,
+                    "velocity": 0.4015748031496063
+                }
+            ],
+            "endOfTrackTicks": 0
+        }
+    ]
+}

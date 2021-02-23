@@ -1,0 +1,42 @@
+{
+  "name": "webxr-threejs-midi-visualizer",
+  "version": "0.1.0",
+  "description": "https://www.youtube.com/channel/UCo_IXLTK8dtF2qOUCt4l47Q",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development",
+    "build": "./node_modules/.bin/webpack --mode development",
+    "build-prod": "./node_modules/.bin/webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "NODE_ENV=development webpack-dev-server --open --hot --display-error-details"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjcobb/webxr-threejs-midi-visualizer.git"
+  },
+  "keywords": [
+    "music animation",
+    "data visualization"
+  ],
+  "author": "sjcobb",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/sjcobb/webxr-threejs-midi-visualizer/issues"
+  },
+  "homepage": "https://github.com/sjcobb/webxr-threejs-midi-visualizer#readme",
+  "dependencies": {
+    "@tonaljs/tonal": "^4.0.0",
+    "gulp": "^4.0.2",
+    "lodash": "^4.17.19",
+    "stats.js": "^0.17.0",
+    "three": "^0.105.2",
+    "tonal": "^2.2.2",
+    "tone": "^13.4.9",
+    "webmidi": "^2.5.1",
+    "webpack": "^4.34.0",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.4"
+  }
+}
