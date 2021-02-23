@@ -39,9 +39,11 @@ export default class Physics {
 
         // this.animate();
 
-        this.initGroundContactMaterial([0, -6, -34], [18, 10, 0.5]);
+        // this.initGroundContactMaterial([0, -8, -34], [18, 10, 0.5]);
+        this.initGroundContactMaterial([0, -8, -29], [18, 6, 0.5]);
 
-        this.initGroundContactMaterial([0, -10, -32], [18, 20, 0.5]);
+        // this.initGroundContactMaterial([0, -12.5, -32], [18, 20, 0.5]);
+        this.initGroundContactMaterial([0, -12.5, -12], [18, 30, 0.5]);
 
         // this.initGroundContactMaterial([0, 10, 0]);
         // this.initGroundContactMaterial([0, 5, 0], [2, 2, 0.1]);
@@ -118,7 +120,10 @@ export default class Physics {
         } else {
             // objSize = 0.5; // v0.3
             // objSize = 0.65; // too big for D maj chord
-            objSize = 0.50;
+            // objSize = 0.50; // jazzhands
+            // objSize = 0.33; // same as ball pit?
+            objSize = 0.38; //
+            // objSize = 0.1;
         }
 
         // console.log('addBody -> options: ', options);
@@ -146,10 +151,12 @@ export default class Physics {
                 options.duration = options.duration > maxDuration ? maxDuration : options.duration;
                 // console.log(options.duration);
 
-                sphereRestitution = options.duration * 0.60;
-                const minRestitution = 0.125;
+                // sphereRestitution = options.duration * 0.60; // too high
+                sphereRestitution = options.duration * 0.50; 
+                // const minRestitution = 0.125;
+                const minRestitution = 0.285;
                 sphereRestitution = sphereRestitution < minRestitution ? minRestitution : sphereRestitution;
-                // console.log({sphereRestitution});
+                console.log({sphereRestitution});
             }
         }
         const material = new CANNON.Material({ restitution: sphereRestitution, friction: 1 }); 
@@ -210,10 +217,9 @@ export default class Physics {
         //     }
         // }
 
-        xPos = options.originalPosition.z;
+        xPos = (options.originalPosition.z - 0);
 
         zPos = -30;
-
 
         body.position.set((sphere) ? -xPos : xPos, yPos, zPos);
 

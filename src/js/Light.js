@@ -27,7 +27,8 @@ export default class Light {
         // const lightPos = [25, 3, 5];
 
         // const lightPos = [0, -6, -34];
-        const lightPos = [-10, 5, -20];
+        // const lightPos = [-10, 5, -20];
+        const lightPos = [-30, 20, -20];
 
         // // //
         let phong = new THREE.MeshPhongMaterial({
@@ -36,7 +37,7 @@ export default class Light {
             specular: 0x070707,
             shininess: 100
         });
-        let box = new THREE.BoxGeometry(0.05, 0.05, 0.05);
+        let box = new THREE.BoxGeometry(0.15, 0.15, 0.15);
         let currentShape, currentMesh;
         currentShape = box;
         currentMesh = phong;
@@ -88,8 +89,9 @@ export default class Light {
 
         // // //
         // const ambient = new THREE.AmbientLight(0x888888);
-        // const ambient = new THREE.AmbientLight(0x343434);
-        const ambient = new THREE.AmbientLight(0xf2f2f2); // beethoven 25
+        // const ambient = new THREE.AmbientLight(0x343434); // too dark
+        // const ambient = new THREE.AmbientLight(0xf2f2f2); // beethoven 25, too bright
+        const ambient = new THREE.AmbientLight(0xe8e8e8);
         Store.scene.add(ambient);
 
         const light = new THREE.DirectionalLight(0xdddddd);

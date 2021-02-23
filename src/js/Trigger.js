@@ -352,27 +352,6 @@ export default class Trigger {
             Store.dashboard.lastNote = combinedNote;
 
             Store.dashboard.allPlayedNotes.push(combinedNote);
-            // Store.dashboard.allPlayedNotes.push(obj.userData.opts.note);
-            // Store.dashboard.allPlayedOctaves.push(obj.userData.opts.octave);
-            // // Store.dashboard.noteCountsDataset.source.note.push(obj.userData.opts.note);
-            // // Store.dashboard.noteCountsDataset.source.octave.push(obj.userData.opts.octave);
-
-            // const noteDatum = {
-
-            // };
-            // Store.dashboard.noteCounts.push(
-            //     {
-            //         note: obj.userData.opts.note,
-            //         octave: obj.userData.opts.octave,
-            //         count: 1
-            //     }
-            // )
-
-            // if (Store.instr[obj.userData.opts.objName].count != null) {
-            //     Store.instr[obj.userData.opts.objName].count++;
-            // } else {
-            //     Store.instr[obj.userData.opts.objName].count = 1;
-            // }
 
             if (Store.dashboard.noteCountsObj[combinedNote] != null) {
                 Store.dashboard.noteCountsObj[combinedNote].count++;
@@ -382,10 +361,7 @@ export default class Trigger {
                     octave: obj.userData.opts.octave,
                     count: 1,
                 };
-                // Store.dashboard.noteCountsObj[combinedNote].count = 1;
             }
-            // console.log(Object.entries(Store.dashboard.noteCountsObj));
-            // Store.dashboard.noteCountsArr = Object.entries(Store.dashboard.noteCountsObj);
 
             Store.dashboard.noteCountsArr = [];
             for (let key in Store.dashboard.noteCountsObj){
@@ -395,7 +371,6 @@ export default class Trigger {
 
             // https://stackoverflow.com/a/8900824/7639084
             Store.dashboard.noteCountsArr.sort(function(a, b) {
-                // console.log(a, b);
                 var textA = a.note.toUpperCase();
                 var textB = b.note.toUpperCase();
                 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
@@ -561,12 +536,12 @@ const recordingPart = new Tone.Part(function(time, datum){
 
     // instrMapped.originalPosition.z -= 15;
     // instrMapped.originalPosition.z -= 18;
-    // instrMapped.originalPosition.z += 10;
+    instrMapped.originalPosition.z += 5;
 
-    instrMapped.duration = datum.duration * 0.6;
+    instrMapped.duration = datum.duration
+    // instrMapped.duration = datum.duration * 0.6;
     // instrMapped.duration = datum.duration / 2;
     // instrMapped.duration = datum.duration * 2;
-    // instrMapped.duration = datum.duration;
 
     // instrMapped.variation = 'guitar';
     // instrMapped.variation = 'violin';
@@ -580,7 +555,7 @@ const recordingPart = new Tone.Part(function(time, datum){
 // }, recordingThirdNotes);  // alphabet song
 
 // recordingPart.volume.value = -18;
-recordingPart.loop = true;
+// recordingPart.loop = true;
 
 //recordingPart.playbackRate = 0.9;
 // recordingPart.start("0:5:0");
