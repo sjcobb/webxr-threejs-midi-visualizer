@@ -92,3 +92,12 @@ I^6    C/E
 IV     F
 
 "endOfTrackTicks": 16382
+
+- https://www.amazon.com/Pixel-Perfect-Camera-Colour-Correction/dp/B07VCTWR5Q
+    - https://www.youtube.com/watch?v=66Inh378YDY | Davinci Resolve Color Match Tool for Color Grading
+
+## Commands
+
+- npm run watch
+- npm run build-prod
+- http-server -S -C localhost+3.pem -K localhost+3-key.pem

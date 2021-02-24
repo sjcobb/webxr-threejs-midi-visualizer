@@ -156,7 +156,7 @@ export default class Physics {
                 // const minRestitution = 0.125;
                 const minRestitution = 0.285;
                 sphereRestitution = sphereRestitution < minRestitution ? minRestitution : sphereRestitution;
-                console.log({sphereRestitution});
+                // console.log({sphereRestitution});
             }
         }
         const material = new CANNON.Material({ restitution: sphereRestitution, friction: 1 }); 
