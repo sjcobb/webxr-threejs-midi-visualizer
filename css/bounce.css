@@ -356,14 +356,14 @@ button#btn-drums-1 {
 	top: 50%;
 	bottom: auto;
 	left: calc(50% - 100px);
-	width: 200px;
+	width: 230px !important;
 	height: 90px;
     padding: 12px 6px;
     border: 2px solid rgb(255, 255, 255);
     border-radius: 45px;
     background: rgba(0, 0, 0, 0.1);
     color: white;
-    font: 24px/1.2 Verdana, sans-serif;
+    font: 24px/1.1 Verdana, sans-serif;
     text-align: center;
     letter-spacing: 4px;
     opacity: 1;
