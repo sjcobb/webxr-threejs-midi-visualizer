@@ -27,11 +27,19 @@ XRLightProbe.getLightEstimate()
 session.depthUsage
 session.depthFormat
 
+const depthInfo = frame.getDepthInformation(view);
+const depthInMeters = depthInfo.getDepthInMeters(x, y);
+//
+vec2 packedDepth = texture2D(depth_texture, uv_coord).ra;
+return dot(packedDepth, vec2(255.0, 256.0 * 255.0)) * u_RawValueToMeters;
+
 - https://www.chromestatus.com/feature/5742647199137792#:~:text=Feature%3A%20WebXR%20Depth%20API,environment%20in%20Augmented%20Reality%20scenarios.
 - https://github.com/immersive-web/depth-sensing/blob/main/explainer.md
 - https://github.com/w3ctag/design-reviews/issues/550
 - https://medium.com/@brijesh.intouch/chess-game-using-webxr-device-api-201f8c06ba2c
 - https://woll-an.medium.com/augmented-reality-measure-with-webxr-and-three-js-a0c8355eb91a
+
+- https://ai.googleblog.com/2020/04/udepth-real-time-3d-depth-sensing-on.html
 
 ## Overview
 ...
