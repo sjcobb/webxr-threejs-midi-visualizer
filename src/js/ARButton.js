@@ -3,6 +3,7 @@
 class ARButton {
 
 	static createButton( renderer, sessionInit = {} ) {
+		console.log('(ARButton) - createButton - sessionInit: ', sessionInit);
 
 		const button = document.createElement( 'button' );
 
@@ -42,6 +43,8 @@ class ARButton {
 
 			async function onSessionStarted( session ) {
 				console.log({session});
+				console.log(session.depthUsage);
+				console.log(session.depthFormat);
 
 				session.addEventListener( 'end', onSessionEnded );
 

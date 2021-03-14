@@ -102,7 +102,18 @@ Store.renderer.setSize(window.innerWidth, window.innerHeight);
 
 if (Store.view.xr === true) {
     Store.renderer.xr.enabled = true;
-    document.body.appendChild(ARButton.createButton( Store.renderer, { requiredFeatures: [ 'hit-test' ] } ));
+
+    // https://github.com/immersive-web/depth-sensing/blob/main/explainer.md
+    // const sessionInitParams = { requiredFeatures: [ 'hit-test' ] };
+    const sessionInitParams = { 
+        requiredFeatures: ['depth-sensing'],
+        depthSensing: {
+            usagePreference: ['cpu-optimized', 'gpu-optimized'],
+            formatPreference: ['luminance-alpha', 'float32']
+        }
+    };
+
+    document.body.appendChild(ARButton.createButton( Store.renderer, sessionInitParams));
     Store.controller = Store.renderer.xr.getController(0);
     Store.controller.addEventListener('select', onSelect);
     Store.scene.add(Store.controller);
