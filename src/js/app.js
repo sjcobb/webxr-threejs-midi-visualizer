@@ -172,7 +172,8 @@ let torus = new THREE.TorusGeometry(0.5, 0.25, 32, 32, 2 * Math.PI);
 
 //-----MATERIAL VARIABLES------//
 let phong = new THREE.MeshPhongMaterial({
-    color: 'pink',
+    // color: 'pink',
+    color: 0x888888,
     emissive: 0,
     specular: 0x070707,
     shininess: 100
@@ -191,10 +192,33 @@ let lambert = new THREE.MeshPhongMaterial({
 let currentShape, currentMesh;
 currentShape = box;
 currentMesh = phong;
-const objCenter = new THREE.Mesh(currentShape, currentMesh);
-objCenter.position.set(0, 0, Store.view.posBehindZ);
+
+let boxRefGeo = new THREE.BoxGeometry(12.15, 12.15, 12.15);
+// const objCenter = new THREE.Mesh(currentShape, currentMesh);
+const objCenter = new THREE.Mesh(boxRefGeo, currentMesh);
+// objCenter.position.set(0, 0, Store.view.posBehindZ);
+// objCenter.position.set(0, 0, 0);
+objCenter.position.set(0, 3, -29);
 // Store.scene.add(objCenter); //for absolute center reference
 
+//-----HUMAN VIDEO------//
+// https://threejs.org/docs/#api/en/textures/VideoTexture
+// https://stackoverflow.com/questions/18383470/using-video-as-texture-with-three-js
+// https://gist.github.com/ErikPeterson/b1db23f83b9ca7904bbf
+// https://stackoverflow.com/questions/37884013/adding-video-as-texture-in-three-js/37892861
+
+const video = document.getElementById('human-keyboard-video');
+// video.src = "URL for your video file goes here";
+video.load();
+video.play();
+
+const videoTexture = new THREE.VideoTexture(video);
+const videoMaterial = new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
+const screenGeo = new THREE.BoxGeometry(20, 30, 2);
+// const screenGeo = new THREE.PlaneGeometry(1, 1, 0);
+const videoScreen = new THREE.Mesh(screenGeo, videoMaterial);
+videoScreen.position.set(-3, -8, -31);
+Store.scene.add(videoScreen);
 
 //-----SKYBOX (LOAD TEXTURES)------//
 if (Store.view.skybox === true) {

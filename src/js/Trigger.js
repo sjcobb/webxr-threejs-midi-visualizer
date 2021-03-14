@@ -555,7 +555,8 @@ const recordingPart = new Tone.Part(function(time, datum){
 // }, recordingThirdNotes);  // alphabet song
 
 // recordingPart.volume.value = -18;
-recordingPart.loop = true;
+// recordingPart.loop = true;
+recordingPart.loop = 2;
 
 //recordingPart.playbackRate = 0.9;
 // recordingPart.start("0:5:0");
