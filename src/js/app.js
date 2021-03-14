@@ -208,17 +208,20 @@ objCenter.position.set(0, 3, -29);
 // https://stackoverflow.com/questions/37884013/adding-video-as-texture-in-three-js/37892861
 
 const video = document.getElementById('human-keyboard-video');
-// video.src = "URL for your video file goes here";
-video.load();
-video.play();
+console.log(video);
+if (video != null) {
+    // video.src = "URL for your video file goes here";
+    video.load();
+    video.play();
 
-const videoTexture = new THREE.VideoTexture(video);
-const videoMaterial = new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
-const screenGeo = new THREE.BoxGeometry(20, 30, 2);
-// const screenGeo = new THREE.PlaneGeometry(1, 1, 0);
-const videoScreen = new THREE.Mesh(screenGeo, videoMaterial);
-videoScreen.position.set(-3, -8, -31);
-Store.scene.add(videoScreen);
+    const videoTexture = new THREE.VideoTexture(video);
+    const videoMaterial = new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
+    const screenGeo = new THREE.BoxGeometry(20, 30, 2);
+    // const screenGeo = new THREE.PlaneGeometry(1, 1, 0);
+    const videoScreen = new THREE.Mesh(screenGeo, videoMaterial);
+    videoScreen.position.set(-3, -8, -31);
+    Store.scene.add(videoScreen);
+}
 
 //-----SKYBOX (LOAD TEXTURES)------//
 if (Store.view.skybox === true) {
