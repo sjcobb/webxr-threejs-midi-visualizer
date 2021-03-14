@@ -1,4 +1,31 @@
+# TODO
+
+- [ ] top of viewport is cut off in ar mode
+- [ ] video mesh does not stay in place in ar mode 
+  - when camera moves, mesh moves slightly
+  - when camera angle changes, mesh stays in place
+- [ ] lighting improvements - add shadows
+
+# WebXR Lighting Estimation API
+
+- https://immersive-web.github.io/lighting-estimation/
+- https://immersive-web.github.io/lighting-estimation/#xrlightprobe
+
+XRLightEstimate provides the estimated lighting values for an XRLightProbe at the time represented by an XRFrame
+
+XRLightProbe.getLightEstimate()
+- primaryLightDirection
+  { x: 0.0, y: 1.0, z: 0.0, w: 0.0 } - means light is shining straight down from above
+- primaryLightIntensity
+  { x: 0.0, y: 0.0, z: 0.0, w: 1.0 } - means no illumination
+
+
 # WebXR Depth API NOTES 
+
+- https://github.com/immersive-web/depth-sensing/blob/main/explainer.md
+
+session.depthUsage
+session.depthFormat
 
 - https://www.chromestatus.com/feature/5742647199137792#:~:text=Feature%3A%20WebXR%20Depth%20API,environment%20in%20Augmented%20Reality%20scenarios.
 - https://github.com/immersive-web/depth-sensing/blob/main/explainer.md
