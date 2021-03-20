@@ -43,8 +43,8 @@ class ARButton {
 
 			async function onSessionStarted( session ) {
 				console.log({session});
-				console.log(session.depthUsage);
-				console.log(session.depthFormat);
+				// console.log(session.depthUsage);
+				// console.log(session.depthFormat);
 
 				session.addEventListener( 'end', onSessionEnded );
 

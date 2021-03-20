@@ -131,8 +131,25 @@ IV     F
 - https://www.amazon.com/Pixel-Perfect-Camera-Colour-Correction/dp/B07VCTWR5Q
     - https://www.youtube.com/watch?v=66Inh378YDY | Davinci Resolve Color Match Tool for Color Grading
 
-## Commands
+## Local Development
+
+- https for local development is mandatory for webxr
+    - https://stackoverflow.com/questions/4779963/how-can-i-access-my-localhost-from-my-android-device
+    - https://developers.google.com/web/tools/chrome-devtools/remote-debugging/local-server
+    - https://github.com/immersive-web/webxr/issues/60#issuecomment-570271488
+    - https://stackoverflow.com/a/46554860/7639084
+
+    - USED: https://matthewhoelter.com/2019/10/21/how-to-setup-https-on-your-local-development-environment-localhost-in-minutes.html
+
+USMORSCOBB2MB:webxr-depth-detector scobb$ http-server -S -C localhost+3.pem -K localhost+3-key.pem
+
+### Commands
 
 - npm run watch
 - npm run build-prod
 - http-server -S -C localhost+3.pem -K localhost+3-key.pem
+
+https://USMORSCOBB2MB.local:8080
+
+https://10.0.0.7:8080
+

@@ -204,7 +204,7 @@ export default {
         posBehindZ: 0,
         songAutoStart: true,
         showDashboard: false,
-        showHitMarker: false,
+        showHitMarker: true,
         showLogoSprite: false,
         showStats: true,
         showStaff: {

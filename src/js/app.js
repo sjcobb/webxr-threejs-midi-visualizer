@@ -105,12 +105,13 @@ if (Store.view.xr === true) {
 
     // https://github.com/immersive-web/depth-sensing/blob/main/explainer.md
     // const sessionInitParams = { requiredFeatures: [ 'hit-test' ] };
-    const sessionInitParams = { 
-        requiredFeatures: ['depth-sensing'],
-        depthSensing: {
-            usagePreference: ['cpu-optimized', 'gpu-optimized'],
-            formatPreference: ['luminance-alpha', 'float32']
-        }
+    const sessionInitParams = {
+        requiredFeatures: ['hit-test'],
+        // requiredFeatures: ['depth-sensing'],
+        // depthSensing: {
+        //     usagePreference: ['cpu-optimized', 'gpu-optimized'],
+        //     formatPreference: ['luminance-alpha', 'float32']
+        // }
     };
 
     document.body.appendChild(ARButton.createButton( Store.renderer, sessionInitParams));
@@ -509,11 +510,10 @@ if (Store.view.chordDetect === true) {
 ////////
 // XR //
 ////////
-
+let hitTestSource = null;
+let hitTestSourceRequested = false;
+let reticle;
 if (Store.view.showHitMarker === true) {
-    let hitTestSource = null;
-    let hitTestSourceRequested = false;
-    let reticle;
     reticle = new THREE.Mesh(
         new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
         new THREE.MeshBasicMaterial()
@@ -534,7 +534,7 @@ function render(timestamp, frame) {
         if (Store.view.showHitMarker === true) {
             if (hitTestSourceRequested === false) {
                 session.requestReferenceSpace('viewer').then( function ( referenceSpace ) {
-                    session.requestHitTestSource( { space: referenceSpace } ).then( function ( source ) {
+                    session.requestHitTestSource({ space: referenceSpace }).then( function ( source ) {
                         hitTestSource = source;
                     });
                 });
@@ -546,6 +546,7 @@ function render(timestamp, frame) {
             }
             if (hitTestSource) {
                 const hitTestResults = frame.getHitTestResults(hitTestSource);
+                console.log({hitTestResults});
                 if ( hitTestResults.length ) {
                     const hit = hitTestResults[ 0 ];
                     reticle.visible = true;
