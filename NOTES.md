@@ -141,6 +141,15 @@ IV     F
 
     - USED: https://matthewhoelter.com/2019/10/21/how-to-setup-https-on-your-local-development-environment-localhost-in-minutes.html
 
+    - TRY: https://stackoverflow.com/a/15855621/7639084
+    sudo nano /etc/hosts
+    127.0.0.1 192.168.0.10
+    ifconfig
+    ifconfig | grep 192
+
+- Sharing
+  - ssh scobb@10.0.0.18
+  
 USMORSCOBB2MB:webxr-depth-detector scobb$ http-server -S -C localhost+3.pem -K localhost+3-key.pem
 
 ### Commands

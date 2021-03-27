@@ -222,18 +222,29 @@ objCenter.position.set(0, 3, -29);
 const video = document.getElementById('human-keyboard-video');
 console.log(video);
 if (video != null) {
-    // video.src = "URL for your video file goes here";
-    video.load();
-    video.play();
+    // // video.src = "URL for your video file goes here";
+    // video.load();
+    // video.play();
 
-    const videoTexture = new THREE.VideoTexture(video);
-    const videoMaterial = new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
-    const screenGeo = new THREE.BoxGeometry(20, 30, 2);
-    // const screenGeo = new THREE.PlaneGeometry(1, 1, 0);
-    const videoScreen = new THREE.Mesh(screenGeo, videoMaterial);
-    videoScreen.position.set(-3, -8, -31);
-    Store.scene.add(videoScreen);
+    // const videoTexture = new THREE.VideoTexture(video);
+    // const videoMaterial = new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
+    // const screenGeo = new THREE.BoxGeometry(20, 30, 2);
+    // // const screenGeo = new THREE.PlaneGeometry(1, 1, 0);
+    // const videoScreen = new THREE.Mesh(screenGeo, videoMaterial);
+    // videoScreen.position.set(-3, -8, -31);
+    // Store.scene.add(videoScreen);
 }
+// https://github.com/hawksley/Threex.chromakey
+// // chroma blue: #0022F5
+//0xd432 is the green screen color, insert yours, if different, below
+// var myGreenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0xd432);
+var myGreenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x000000);
+// var myGreenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
+// var myGeometry = new THREE.PlaneBufferGeometry(5, 5);
+var myGeometry = new THREE.BoxGeometry(20, 30, 2);
+var myGreenScreenVideoObject = new THREE.Mesh(myGeometry, myGreenScreenMaterial);
+myGreenScreenVideoObject.position.set(-3, -8, -31);
+Store.scene.add(myGreenScreenVideoObject);
 
 //-----SKYBOX (LOAD TEXTURES)------//
 if (Store.view.skybox === true) {
