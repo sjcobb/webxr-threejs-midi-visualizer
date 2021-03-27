@@ -17,6 +17,7 @@ THREEx.ChromaKeyMaterial = function (url, keyColor) {
     videoTexture.magFilter = THREE.LinearFilter;
 
     this.startVideo = function () {
+        console.log('startVideo() -> this: ', this);
         video.play();
     };
 
@@ -35,9 +36,9 @@ THREEx.ChromaKeyMaterial = function (url, keyColor) {
     };
 
     this.setValues({
-
+        // https://stackoverflow.com/a/64731616/7639084
         uniforms: {
-            texture: {
+            textureUni: {
                 type: "t",
                 value: videoTexture
             },
@@ -55,12 +56,12 @@ THREEx.ChromaKeyMaterial = function (url, keyColor) {
             "gl_Position = projectionMatrix * mvPosition;\n" +
             "}",
         fragmentShader:
-            "uniform mediump sampler2D texture;\n" +
+            "uniform mediump sampler2D textureUni;\n" +
             "uniform mediump vec3 color;\n" +
             "varying mediump vec2 vUv;\n" +
             "void main(void)\n" +
             "{\n" +
-            "  mediump vec3 tColor = texture2D( texture, vUv ).rgb;\n" +
+            "  mediump vec3 tColor = texture2D( textureUni, vUv ).rgb;\n" +
             "  mediump float a = (length(tColor - color) - 0.5) * 7.0;\n" +
             "  gl_FragColor = vec4(tColor, a);\n" +
             "}",

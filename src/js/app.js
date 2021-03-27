@@ -238,13 +238,14 @@ if (video != null) {
 // // chroma blue: #0022F5
 //0xd432 is the green screen color, insert yours, if different, below
 // var myGreenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0xd432);
-var myGreenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x000000);
-// var myGreenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
-// var myGeometry = new THREE.PlaneBufferGeometry(5, 5);
-var myGeometry = new THREE.BoxGeometry(20, 30, 2);
+// var myGreenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x000000);
+var myGreenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
+var myGeometry = new THREE.PlaneBufferGeometry(20, 30);
+// var myGeometry = new THREE.BoxGeometry(20, 30, 2);
 var myGreenScreenVideoObject = new THREE.Mesh(myGeometry, myGreenScreenMaterial);
 myGreenScreenVideoObject.position.set(-3, -8, -31);
 Store.scene.add(myGreenScreenVideoObject);
+myGreenScreenMaterial.startVideo();
 
 //-----SKYBOX (LOAD TEXTURES)------//
 if (Store.view.skybox === true) {
@@ -363,6 +364,8 @@ let animate = () => {
         //     // Store.camera.position.x = (Store.ticks) - 55; 
         // }
     }
+    
+    myGreenScreenMaterial.update();
 
     physics.updateBodies(Store.world);
     Store.world.step(Store.fixedTimeStep);
@@ -373,13 +376,10 @@ let animate = () => {
     // https://stemkoski.github.io/Three.js/Multiple-Cameras.html
     // https://observablehq.com/@vicapow/threejs-example-of-multiple-camera-viewports
     // https://github.com/mrdoob/three.js/blob/dev/examples/webgl_multiple_views.html#L258
-
     // TODO: reusable updateCamera method
-
     left = 0;
     // console.log({left}); // 0
     // console.log({bottom}); // 0
-
     if (Store.view.splitScreen === true) {
         width = Math.floor(width / 2);
     }
