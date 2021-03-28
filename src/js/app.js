@@ -275,6 +275,32 @@ if (Store.view.skybox === true) {
     Store.scene.add(skyboxCubeMesh); //add nightsky skybox
 }
 
+//-----CONSOLE------//
+// https://stackoverflow.com/questions/52270850/three-js-rendering-text-to-scene
+// https://stackoverflow.com/questions/19846078/how-to-read-from-chromes-console-in-javascript
+const fontLoader = new THREE.FontLoader();
+fontLoader.load( 'https://cdn.rawgit.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
+    const textGeo = new THREE.TextGeometry('Console errors go here...', {
+        font: font,
+        size: 80,
+        height: 5,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 10,
+        bevelSize: 8,
+        bevelSegments: 5
+    });
+    const textMaterial = new THREE.MeshLambertMaterial({
+        color: 0xF3FFE2
+    });
+    const consoleMesh = new THREE.Mesh(textGeo, textMaterial);
+    // consoleMesh.position.set(0, 2, 0);
+    consoleMesh.position.set(-3, -8, -31);
+    consoleMesh.scale.multiplyScalar(0.01)
+    consoleMesh.castShadow = true;
+    Store.scene.add(consoleMesh);
+});
+
 //-----MUSIC STAFF------//
 function addStaffLines(color = 0x000000, offset, posXstart, posXend, posY, posZ, innerLinePadding, dashedLines = false, middleC = false) {
     const origOffset = offset;
