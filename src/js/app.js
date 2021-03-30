@@ -645,19 +645,21 @@ function render(timestamp, frame) {
 // https://threejs.org/examples/webxr_vr_rollercoaster.html
 // https://github.com/mrdoob/three.js/blob/master/examples/webxr_ar_hittest.html#L59
 const cylinderGeo = new THREE.CylinderGeometry(0.1, 0.1, 0.2, 32).translate(0, 0.1, 0);
+// const greenScreenGeo = new THREE.BoxGeometry(20, 30, 2);
+// const greenScreenGeo = new THREE.BoxGeometry(0.2, 0.3, 0.01).translate(0, 0.1, 0);
+const greenScreenGeo = new THREE.BoxGeometry(0.8, 1, 0.01).translate(0, 0.1, 0);
 
 function onSelect() {
     console.log('XR controller -> onSelect()...');
     if ( reticle.visible ) {
         greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
         const cylinderMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
-        const cylinderMesh = new THREE.Mesh(cylinderGeo, greenScreenMaterial);
+        const cylinderMesh = new THREE.Mesh(greenScreenGeo, greenScreenMaterial);
         cylinderMesh.position.setFromMatrixPosition(reticle.matrix);
         cylinderMesh.scale.y = Math.random() * 2 + 1;
         Store.scene.add(cylinderMesh);
 
         // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
-        // var greenScreenGeo = new THREE.BoxGeometry(20, 30, 2);
         // var greenScreenVideoObject = new THREE.Mesh(greenScreenGeo, greenScreenMaterial);
         // // greenScreenVideoObject.scale.y = Math.random() * 2 + 1;
         // console.log('onSelect -> reticle: ', reticle);

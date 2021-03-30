@@ -162,3 +162,4 @@ https://USMORSCOBB2MB.local:8080
 
 https://10.0.0.7:8080
 
+chrome://inspect/#devices
