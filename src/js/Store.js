@@ -1,5 +1,6 @@
 // import InstrumentMappings from './InstrumentMappings.js';
 import { FlyControls } from 'three/examples/jsm/controls/FlyControls.js';
+// import { Scene}  from '../../vendor/render/scenes/scene.js';
 
 export default {
     // activeInstrColor: '#9F532A', // ltred
@@ -23,6 +24,7 @@ export default {
     ai: {
         enabled: false,
     },
+    bodies: [],
     // bpm: 120,
     // bpm: 140,
     bpm: 160,
@@ -123,6 +125,8 @@ export default {
     dropPosY: 0,
     //  dropPosZ: 0, // should z be swapped with y?
     drumsOnly: false,
+    errorText: '',
+    errorGeo: '',
     fixedTimeStep: 1.0 / 60.0,
     flameArr: [],
     flameCounter: 0,
@@ -137,7 +141,6 @@ export default {
     loader: new THREE.TextureLoader(),
     machineTrigger: false,
     meshes: [],
-    bodies: [],
     multiplierPosX: -2.5,
     musicActive: false,
     patternInfinite: false,
@@ -173,6 +176,7 @@ export default {
         guitar: {},
     },
     scene: new THREE.Scene(),
+    // sceneXR: new Scene(),
     spinnerBody: {},
     // staffLineInitZ: 8,    // remove
     // staffLineSecondZ: -8, // remove

@@ -15,6 +15,12 @@ import Recording from './Recording.js';
 // console.log({recordingFirstNotes});
 // console.log(recordingFirstNotes.tracks[0].notes);
 
+// import { Node } from '../../vendor/render/core/node';
+// import { Gltf2Node } from '../../vendor/render/nodes/gltf2.js';
+// import { DropShadowNode } from '../../vendor/render/nodes/drop-shadow.js';
+// import { vec3 } from '../../vendor/render/math/gl-matrix.js';
+// import { Ray } from '../../vendor/render/math/ray.js';
+
 /***
  *** SCENE SETUP ***
  * Tone.js: v13.8.4 *
@@ -170,6 +176,51 @@ const physics = new Physics();
 // physics.init();
 physics.initPhysics();
 
+//-----CONSOLE------//
+// https://stackoverflow.com/questions/52270850/three-js-rendering-text-to-scene
+// https://stackoverflow.com/questions/19846078/how-to-read-from-chromes-console-in-javascript
+let consoleFont;
+const fontLoader = new THREE.FontLoader();
+fontLoader.load( 'https://cdn.rawgit.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
+    consoleFont = font;
+});
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+    console.log(msg);
+    // Store.errorText.push(msg);
+
+    setTimeout(() => {
+        Store.errorText = msg;
+        console.log(Store.errorText);
+
+        Store.errorGeo = new THREE.TextGeometry(Store.errorText, {
+            font: consoleFont,
+            size: 80,
+            height: 5,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 10,
+            bevelSize: 8,
+            bevelSegments: 5
+        });
+        const textMaterial = new THREE.MeshLambertMaterial({
+            color: 0xF3FFE2
+        });
+        const consoleMesh = new THREE.Mesh(Store.errorGeo, textMaterial);
+        // consoleMesh.position.set(0, 2, 0);
+        consoleMesh.position.set(-3, -8, -31);
+        consoleMesh.scale.multiplyScalar(0.01)
+        consoleMesh.castShadow = true;
+        Store.scene.add(consoleMesh);
+    }, 2000);
+    
+    return false;
+}
+// console.error('ERR -> test error');
+// const errorTest = new THREE.VideoTexture(undefined);
+// const errorElement = document.getElementById('undef-id');
+// errorElement.innerHTML = '...';
+// console.log(Math.max('test'));
+
 /////////////// 
 // RECORDING //
 //////////////
@@ -234,18 +285,22 @@ if (video != null) {
     // videoScreen.position.set(-3, -8, -31);
     // Store.scene.add(videoScreen);
 }
+
 // https://github.com/hawksley/Threex.chromakey
 // // chroma blue: #0022F5
 //0xd432 is the green screen color, insert yours, if different, below
-// var myGreenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0xd432);
-// var myGreenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x000000);
-var myGreenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
-var myGeometry = new THREE.PlaneBufferGeometry(20, 30);
-// var myGeometry = new THREE.BoxGeometry(20, 30, 2);
-var myGreenScreenVideoObject = new THREE.Mesh(myGeometry, myGreenScreenMaterial);
-myGreenScreenVideoObject.position.set(-3, -8, -31);
-Store.scene.add(myGreenScreenVideoObject);
-myGreenScreenMaterial.startVideo();
+let greenScreenMaterial;
+// setTimeout(() => {
+//     // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0xd432);
+//     // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x000000);
+//     greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
+//     // var greenscreenGeo = new THREE.PlaneBufferGeometry(20, 30);
+//     var greenScreenGeo = new THREE.BoxGeometry(20, 30, 2);
+//     var greenScreenVideoObject = new THREE.Mesh(greenScreenGeo, greenScreenMaterial);
+//     greenScreenVideoObject.position.set(-3, -8, -31);
+//     Store.scene.add(greenScreenVideoObject);
+//     greenScreenMaterial.startVideo();
+// }, 3000);
 
 //-----SKYBOX (LOAD TEXTURES)------//
 if (Store.view.skybox === true) {
@@ -274,32 +329,6 @@ if (Store.view.skybox === true) {
 
     Store.scene.add(skyboxCubeMesh); //add nightsky skybox
 }
-
-//-----CONSOLE------//
-// https://stackoverflow.com/questions/52270850/three-js-rendering-text-to-scene
-// https://stackoverflow.com/questions/19846078/how-to-read-from-chromes-console-in-javascript
-const fontLoader = new THREE.FontLoader();
-fontLoader.load( 'https://cdn.rawgit.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
-    const textGeo = new THREE.TextGeometry('Console errors go here...', {
-        font: font,
-        size: 80,
-        height: 5,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: 10,
-        bevelSize: 8,
-        bevelSegments: 5
-    });
-    const textMaterial = new THREE.MeshLambertMaterial({
-        color: 0xF3FFE2
-    });
-    const consoleMesh = new THREE.Mesh(textGeo, textMaterial);
-    // consoleMesh.position.set(0, 2, 0);
-    consoleMesh.position.set(-3, -8, -31);
-    consoleMesh.scale.multiplyScalar(0.01)
-    consoleMesh.castShadow = true;
-    Store.scene.add(consoleMesh);
-});
 
 //-----MUSIC STAFF------//
 function addStaffLines(color = 0x000000, offset, posXstart, posXend, posY, posZ, innerLinePadding, dashedLines = false, middleC = false) {
@@ -391,7 +420,9 @@ let animate = () => {
         // }
     }
     
-    myGreenScreenMaterial.update();
+    if (greenScreenMaterial) {
+        greenScreenMaterial.update();
+    }
 
     physics.updateBodies(Store.world);
     Store.world.step(Store.fixedTimeStep);
@@ -560,6 +591,20 @@ if (Store.view.showHitMarker === true) {
     Store.scene.add(reticle);
 }
 
+// let arObject = new Node();
+// arObject.visible = false;
+// // // Store.scene.add(arObject); // THREE.Object3D.add: object not an instance of THREE.Object3D. 
+// // // Store.scene.addNode(arObject);
+// Store.sceneXR.addNode(arObject);
+
+// let flower = new Gltf2Node({url: '../../vendor/media/gltf/sunflower/sunflower.gltf'});
+// // arObject.addNode(flower);
+
+// // https://github.com/immersive-web/webxr-samples/blob/main/hit-test.html#L79
+// let shadow = new DropShadowNode();
+// vec3.set(shadow.scale, 0.15, 0.15, 0.15);
+// // arObject.addNode(shadow);
+
 function render(timestamp, frame) {
     if (frame) {
         // console.log({frame});
@@ -583,7 +628,7 @@ function render(timestamp, frame) {
             }
             if (hitTestSource) {
                 const hitTestResults = frame.getHitTestResults(hitTestSource);
-                console.log({hitTestResults});
+                // console.log({hitTestResults});
                 if ( hitTestResults.length ) {
                     const hit = hitTestResults[ 0 ];
                     reticle.visible = true;
@@ -597,13 +642,59 @@ function render(timestamp, frame) {
     Store.renderer.render(Store.scene, Store.camera);
 }
 
+// https://threejs.org/examples/webxr_vr_rollercoaster.html
+// https://github.com/mrdoob/three.js/blob/master/examples/webxr_ar_hittest.html#L59
+const cylinderGeo = new THREE.CylinderGeometry(0.1, 0.1, 0.2, 32).translate(0, 0.1, 0);
+
 function onSelect() {
     console.log('XR controller -> onSelect()...');
     if ( reticle.visible ) {
-        const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
-        const mesh = new THREE.Mesh( geometry, material );
-        mesh.position.setFromMatrixPosition( reticle.matrix );
-        mesh.scale.y = Math.random() * 2 + 1;
-        Store.scene.add(mesh);
+        greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
+        const cylinderMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
+        const cylinderMesh = new THREE.Mesh(cylinderGeo, greenScreenMaterial);
+        cylinderMesh.position.setFromMatrixPosition(reticle.matrix);
+        cylinderMesh.scale.y = Math.random() * 2 + 1;
+        Store.scene.add(cylinderMesh);
+
+        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
+        // var greenScreenGeo = new THREE.BoxGeometry(20, 30, 2);
+        // var greenScreenVideoObject = new THREE.Mesh(greenScreenGeo, greenScreenMaterial);
+        // // greenScreenVideoObject.scale.y = Math.random() * 2 + 1;
+        // console.log('onSelect -> reticle: ', reticle);
+        // Store.scene.add(greenScreenVideoObject);
+
+        // greenScreenVideoObject.position.copy(reticle.position);
+        // greenScreenVideoObject.position.setX(reticle.position.x);
+        // greenScreenVideoObject.position.setY(reticle.position.y);
+        // greenScreenVideoObject.position.setZ(reticle.position.z);
+
+        // greenScreenVideoObject.position.setFromMatrixPosition(reticle.matrix);
+        // // greenScreenVideoObject.position.set(-3, -8, -31);
+        // greenScreenVideoObject.position.setZ(greenScreenVideoObject.position.z -= 30);
+
+        setTimeout(() => {
+            greenScreenMaterial.startVideo();
+        }, 3000);
+        
+        // console.log('onSelect -> greenScreenVideoObject: ', greenScreenVideoObject);
+        // greenScreenMaterial.update();
     }
 }
+console.log('Store.camera.position: ', Store.camera.position);
+
+function addARObjectAt(matrix) {
+    let newFlower = arObject.clone();
+    newFlower.visible = true;
+    newFlower.matrix = matrix;
+    Store.scene.addNode(newFlower);
+
+    // flowers.push(newFlower);
+    // if (flowers.length > MAX_FLOWERS) {
+    //     let oldFlower = flowers.shift();
+    //     scene.removeNode(oldFlower);
+    // }
+}
+
+// CONSOLE ERROR TEST
+// const errorElement = document.getElementById('undef-id');
+// errorElement.innerHTML = '...';

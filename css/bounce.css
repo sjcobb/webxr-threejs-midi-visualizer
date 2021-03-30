@@ -344,7 +344,7 @@ button#btn-drums-1 {
 }
 
 .title-container {
-    display: none;
+    /* display: none; */
     position: absolute;
     top: 20px;
     left: 0;

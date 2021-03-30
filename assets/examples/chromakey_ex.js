@@ -43,7 +43,6 @@ ChromaKeyMaterial = function (url, width, height, keyColor) {
 	}
 
 	this.setValues({
-
 		uniforms: {
 			texture: {
 				type: "t",
