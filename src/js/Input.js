@@ -239,7 +239,7 @@ function humanKeyUp(note, timestampLength) {
 
     // // // if (note !== 72 && note !== 71 && note !== 67 && note !== 66) { // B5, C6, G5, Gb5
     // if (true) {
-    //     physics.addBody(true, Store.dropPosX, instrMapped);
+    //     physics.addBody(true, Store.view.posDropX, instrMapped);
     // }
 
     // // humanKeyRemovals.push({ note });
@@ -263,7 +263,7 @@ function playNote(note, duration = 250) {
 
     // // if (note !== 72 && note !== 71 && note !== 67 && note !== 66) { // B5, C6, G5, Gb5
     if (true) {
-        physics.addBody(true, Store.dropPosX, instrMapped);
+        physics.addBody(true, Store.view.posDropX, instrMapped);
     }
 }
 
@@ -281,7 +281,7 @@ function machineKeyDown(note = 60, time = 0) {
     }
 
     // drops sphere that triggers note
-    physics.addBody(true, Store.dropPosX, instrMapped);
+    physics.addBody(true, Store.view.posDropX, instrMapped);
 }
 
 function buildNoteSequence(seed) {

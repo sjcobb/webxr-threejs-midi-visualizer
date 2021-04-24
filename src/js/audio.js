@@ -15,7 +15,7 @@ const physics = new Physics();
 //-----INSTRUMENT PARTS------//
 var allDrumsPart = new Tone.Part(function(time, instr) {
     // physics.addBody(true, time * Store.multiplierPosX, instr);
-    physics.addBody(true, Store.dropPosX, instr);
+    physics.addBody(true, Store.view.posDropX, instr);
 }, [
     ["0:0:0", Store.instr.kickPrimary],
     ["0:1:0", Store.instr.kickPrimary],
@@ -34,8 +34,8 @@ allDrumsPart.loop = true;
 
 var introPart = new Tone.Part(function(time, instr) {
     // TODO: use Store.dropCoordCircle [0] and [719] for dropPosX and dropPosY (must be added as param to addBody) coordinates
-    // console.log('introPart -> dropPosX, dropPosY: ', Store.dropPosX, '-', Store.dropPosY);
-    physics.addBody(true, Store.dropPosX, instr, 0);
+    // console.log('introPart -> dropPosX, dropPosY: ', Store.view.posDropX, '-', Store.view.posDropY);
+    physics.addBody(true, Store.view.posDropX, instr, 0);
     // physics.addBody(true, time * Store.multiplierPosX, instr); // sine wave
 }, [
     ["0:0:0", Store.instr.hiHatClosed],
@@ -57,7 +57,7 @@ introPart.loop = true;
 // introPart.start("3:0:0");
 
 // var secPosPart = new Tone.Part(function(time, instr) {
-//     physics.addBody(true, Store.dropPosX, instr, 1);
+//     physics.addBody(true, Store.view.posDropX, instr, 1);
 // }, [
 //     //[ "0:0:0", Store.instr.hiHatClosed],
 //     // ["0:2:0", Store.instr.kickPrimary],
@@ -68,7 +68,7 @@ introPart.loop = true;
 
 
 // var thirdPosPart = new Tone.Part(function(time, instr) {
-//     physics.addBody(true, Store.dropPosX, instr, 2);
+//     physics.addBody(true, Store.view.posDropX, instr, 2);
 // }, [
 //     ["0:0:0", Store.instr.kickPrimary],
 // ]);
@@ -76,7 +76,7 @@ introPart.loop = true;
 // // thirdPosPart.start("0:0:0");
 
 // var fourthPosPart = new Tone.Part(function(time, instr) {
-//     physics.addBody(true, Store.dropPosX, instr, 3);
+//     physics.addBody(true, Store.view.posDropX, instr, 3);
 // }, [
 //     ["0:0:0", Store.instr.kickPrimary],
 // ]);

@@ -547,7 +547,7 @@ const recordingPart = new Tone.Part(function(time, datum){
     // instrMapped.variation = 'violin';
     // instrMapped.variation = 'piano';
 
-    physics.addBody(true, Store.dropPosX, instrMapped, 0);
+    physics.addBody(true, Store.view.posDropX, instrMapped, 0);
 
 }, Store.recording.parts[0]);
 // }, recordingFirstNotes);      // twinkle twinkle little star
@@ -555,8 +555,8 @@ const recordingPart = new Tone.Part(function(time, datum){
 // }, recordingThirdNotes);  // alphabet song
 
 // recordingPart.volume.value = -18;
-// recordingPart.loop = true;
-recordingPart.loop = 2;
+recordingPart.loop = true;
+// recordingPart.loop = 2;
 
 //recordingPart.playbackRate = 0.9;
 // recordingPart.start("0:5:0");
@@ -587,7 +587,7 @@ const recordingSecondPart = new Tone.Part(function(time, datum){
     // instrMapped.variation = 'sample';
     // instrMapped.variation = 'violin';
 
-    physics.addBody(true, Store.dropPosX, instrMapped, 0);
+    physics.addBody(true, Store.view.posDropX, instrMapped, 0);
 
 }, Store.recording.parts[1]);
 // }, recordingSecondNotes);  // bah bah black sheep

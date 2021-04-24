@@ -39,14 +39,9 @@ export default class Physics {
 
         // this.animate();
 
-        // this.initGroundContactMaterial([0, -8, -34], [18, 10, 0.5]);
-        this.initGroundContactMaterial([0, -8, -29], [18, 6, 0.5]);
-
-        // this.initGroundContactMaterial([0, -12.5, -32], [18, 20, 0.5]);
-        this.initGroundContactMaterial([0, -12.5, -12], [18, 30, 0.5]);
-
-        // this.initGroundContactMaterial([0, 10, 0]);
-        // this.initGroundContactMaterial([0, 5, 0], [2, 2, 0.1]);
+        // // this.initGroundContactMaterial([0, -8, -29], [18, 6, 0.5]); // hallway vid
+        // this.initGroundContactMaterial([0, Store.view.posLandY, -29], [18, 6, 0.5]); // first bounce
+        // this.initGroundContactMaterial([0, -12.5, -12], [18, 30, 0.5]); // 2nd bounce
 
         // this.addSpinner();
     }
@@ -191,14 +186,15 @@ export default class Physics {
         // https://stackoverflow.com/questions/44630265/how-can-i-set-z-up-coordinate-system-in-three-js
         // const yPos = 20; // v0.4, v0.5
         // const yPos = 1;
-        const yPos = 30;
+        // const yPos = 30;
+        const yPos = Store.view.posDropY; // 30
 
         /*** Randomized Y drop point ***/
         // const y = Math.random() * (10 - 5) + 5; //rdm b/w 5 and 10
 
         let zPos;
-        zPos = options.originalPosition !== undefined ? options.originalPosition.z : Math.random() * (15 - 5) - 2;
-        // zPos = Store.dropPosY; // drum spinner (v0.3)
+        zPos = options.originalPosition !== undefined ? options.originalPosition.z : Store.view.posDropZ;
+        // console.log(zPos);
 
         // body.mass = 1; // feather light
         // body.mass = 8; // heavy
@@ -219,7 +215,14 @@ export default class Physics {
 
         xPos = (options.originalPosition.z - 0);
 
-        zPos = -30;
+        if (Store.view.reticleSelected === true) {
+            xPos = Store.view.posDropX;
+        }
+        console.log({xPos});
+        
+        // zPos = -30;
+        zPos = Store.view.posDropZ; // -30
+        console.log({zPos});
 
         body.position.set((sphere) ? -xPos : xPos, yPos, zPos);
 

@@ -72,17 +72,11 @@ const createCamera = () => {
 
 //-----CAMERA 1------//
 Store.camera = createCamera();
-// Store.camera.position.set(0, 16, 26); 
-// Store.camera.lookAt(new THREE.Vector3(0, -2.5, 0)); // v0.5
-
-// Store.camera.position.set(Store.view.posBehindX, Store.view.posBehindY, Store.view.posBehindZ);
-// Store.camera.lookAt(new THREE.Vector3(Store.dropPosX, 1, Store.view.posBehindZ - 15));
-
 Store.camera.position.set(0, 0, 0); 
 // Store.camera.lookAt(new THREE.Vector3(0, -2.5, 0)); // v0.5
 
 if (Store.cameraLookUp === true) {
-    Store.camera.lookAt(new THREE.Vector3(Store.dropPosX - 5, 100, Store.view.posBehindZ));
+    Store.camera.lookAt(new THREE.Vector3(Store.view.posDropX - 5, 100, Store.view.posBehindZ));
 }
 
 console.log('Store.camera: ', Store.camera);
@@ -149,9 +143,11 @@ window.addEventListener('resize', function() {
 //////////////
 // https://threejs.org/examples/#misc_controls_fly
 Store.controls = new FlyControls(Store.camera);
-Store.controls.movementSpeed = 1; //prev: 10
+// Store.controls.movementSpeed = 1; // slow
+Store.controls.movementSpeed = 10; // fast
 Store.controls.domElement = Store.renderer.domElement;
-Store.controls.rollSpeed = Math.PI / 40;
+// Store.controls.rollSpeed = Math.PI / 40; // slow
+Store.controls.rollSpeed = Math.PI / 20; // fast
 Store.controls.autoForward = false;
 Store.controls.dragToLook = true;
 
@@ -203,11 +199,12 @@ window.onerror = function (msg, url, lineNo, columnNo, error) {
             bevelSegments: 5
         });
         const textMaterial = new THREE.MeshLambertMaterial({
-            color: 0xF3FFE2
+            // color: 0xF3FFE2,
+            color: 0xb9b9b9,
         });
         const consoleMesh = new THREE.Mesh(Store.errorGeo, textMaterial);
         // consoleMesh.position.set(0, 2, 0);
-        consoleMesh.position.set(-3, -8, -31);
+        consoleMesh.position.set(-3, -6, -31);
         consoleMesh.scale.multiplyScalar(0.01)
         consoleMesh.castShadow = true;
         Store.scene.add(consoleMesh);
@@ -499,8 +496,8 @@ window.onload = () => {
             let keyMapped = instrument.getKeyboardMapping(keyName);
             switch (keyName) { 
                 case ('z'):
-                    // physics.addBody(true, Store.dropPosX, keyMapped);
-                    // Store.dropPosX -= 1.3;
+                    // physics.addBody(true, Store.view.posDropX, keyMapped);
+                    // Store.view.posDropX -= 1.3;
                     break;
                 case ('Escape'):
                     Tone.Transport.stop();
@@ -522,7 +519,7 @@ window.onload = () => {
 
             if (keyMapped !== undefined) {
                 if (keyName === keyMapped.keyInput) {
-                    physics.addBody(true, Store.dropPosX, keyMapped);
+                    physics.addBody(true, Store.view.posDropX, keyMapped);
                 } else {}
             }
         }
@@ -580,15 +577,49 @@ if (Store.view.chordDetect === true) {
 ////////
 let hitTestSource = null;
 let hitTestSourceRequested = false;
-let reticle;
 if (Store.view.showHitMarker === true) {
-    reticle = new THREE.Mesh(
+    Store.reticle = new THREE.Mesh(
+        // https://threejs.org/docs/#api/en/geometries/RingGeometry
         new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
-        new THREE.MeshBasicMaterial()
+        // new THREE.RingGeometry(0.15, 0.2, 32),
+        // new THREE.RingGeometry(1, 5, 32),
+        // new THREE.RingGeometry(1, 5, 32).rotateX( - Math.PI / 2 ),
+        new THREE.MeshBasicMaterial({
+            // color: 'blue',
+            // color: 0x888888,
+            color: 0x000000,
+            side: THREE.DoubleSide,
+        }),
     );
-    reticle.matrixAutoUpdate = false;
-    reticle.visible = false;
-    Store.scene.add(reticle);
+
+    if (Store.reticleDebugMode === true) {
+        Store.reticle.visible = true;
+    } else {
+        Store.reticle.matrixAutoUpdate = false;
+        Store.reticle.visible = false;
+    }
+    Store.scene.add(Store.reticle);
+
+    // Store.reticle.position.set(0, 0, 0);
+    // Store.reticle.position.set(Store.view.posDropX, Store.view.posDropY, Store.view.posDropZ);
+    // Store.reticle.position.set(Store.view.posDropX, 10, Store.view.posDropZ);
+    
+    // Store.reticle.position.set(0, 0, Store.view.posDropZ);
+    Store.reticle.position.set(0, Store.view.posLandY, Store.view.posDropZ);
+
+    const currentReticlePosition = Store.reticle.position;
+    console.log({currentReticlePosition});
+    // https://threejs.org/docs/#api/en/math/Vector3.setFromMatrixPosition
+    // Store.reticle.position.setFromMatrixPosition(currentReticlePosition); 
+
+    // Store.reticle.matrix.fromArray([0, 0, 0]);
+
+    // Store.reticle.position.setX(0);
+    // Store.reticle.position.setY(0);
+    // Store.reticle.position.setZ(0);
+
+    // // Store.reticle.position.setFromMatrixPosition(tempVar.matrix);
+    console.log('init -> Store.reticle: ', Store.reticle);
 }
 
 // let arObject = new Node();
@@ -630,11 +661,14 @@ function render(timestamp, frame) {
                 const hitTestResults = frame.getHitTestResults(hitTestSource);
                 // console.log({hitTestResults});
                 if ( hitTestResults.length ) {
-                    const hit = hitTestResults[ 0 ];
-                    reticle.visible = true;
-                    reticle.matrix.fromArray(hit.getPose( referenceSpace ).transform.matrix);
+                    const hit = hitTestResults[0];
+                    Store.reticle.visible = true;
+                    const hitMatrixPos = hit.getPose(referenceSpace).transform.matrix;
+                    Store.reticle.matrix.fromArray(hitMatrixPos); // TODO: place reticleMesh using static angle 
                 } else {
-                    reticle.visible = false;
+                    if (Store.reticleDebugMode !== true) {
+                        Store.reticle.visible = false;
+                    }
                 }
             }
         }
@@ -644,36 +678,62 @@ function render(timestamp, frame) {
 
 // https://threejs.org/examples/webxr_vr_rollercoaster.html
 // https://github.com/mrdoob/three.js/blob/master/examples/webxr_ar_hittest.html#L59
+
+const greenScreenSize = [0.8, 1, 0.01];
 const cylinderGeo = new THREE.CylinderGeometry(0.1, 0.1, 0.2, 32).translate(0, 0.1, 0);
 // const greenScreenGeo = new THREE.BoxGeometry(20, 30, 2);
 // const greenScreenGeo = new THREE.BoxGeometry(0.2, 0.3, 0.01).translate(0, 0.1, 0);
-const greenScreenGeo = new THREE.BoxGeometry(0.8, 1, 0.01).translate(0, 0.1, 0);
+const greenScreenGeo = new THREE.BoxGeometry(...greenScreenSize).translate(0, 0.1, 0);
 
 function onSelect() {
     console.log('XR controller -> onSelect()...');
-    if ( reticle.visible ) {
+    Store.view.reticleSelected = true;
+
+    physics.addBody(true, Store.view.posDropX);
+
+    if (Store.reticle.visible) {
+        console.log('Store.reticle: ', Store.reticle);
+        Store.view.posDropMatrix = Store.reticle.matrix;
+
         greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
         const cylinderMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
         const cylinderMesh = new THREE.Mesh(greenScreenGeo, greenScreenMaterial);
-        cylinderMesh.position.setFromMatrixPosition(reticle.matrix);
+        cylinderMesh.position.setFromMatrixPosition(Store.reticle.matrix);
+        console.log('PRE cylinderMesh.position: ', cylinderMesh.position);
+
         cylinderMesh.scale.y = Math.random() * 2 + 1;
         Store.scene.add(cylinderMesh);
 
-        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
-        // var greenScreenVideoObject = new THREE.Mesh(greenScreenGeo, greenScreenMaterial);
-        // // greenScreenVideoObject.scale.y = Math.random() * 2 + 1;
-        // console.log('onSelect -> reticle: ', reticle);
-        // Store.scene.add(greenScreenVideoObject);
+        // https://threejs.org/docs/#api/en/math/Vector3
+        // bundle.js:19 cylinderMesh.position:  t {x: -0.8785914778709412, y: -0.8584758639335632, z: -1.0065946578979492, isVector3: true}
+        console.log('cylinderMesh.position: ', cylinderMesh.position);
 
-        // greenScreenVideoObject.position.copy(reticle.position);
-        // greenScreenVideoObject.position.setX(reticle.position.x);
-        // greenScreenVideoObject.position.setY(reticle.position.y);
-        // greenScreenVideoObject.position.setZ(reticle.position.z);
+        const reticleCurrentPosition = [Store.reticle.position.x, Store.reticle.position.y, Store.reticle.position.z];
+        console.log({reticleCurrentPosition});
 
-        // greenScreenVideoObject.position.setFromMatrixPosition(reticle.matrix);
-        // // greenScreenVideoObject.position.set(-3, -8, -31);
-        // greenScreenVideoObject.position.setZ(greenScreenVideoObject.position.z -= 30);
+        // TODO: why do balls not drop from same location as reticle?
+        Store.view.posDropX = Store.reticle.position.x;
+        // Store.view.posDropY = (Store.reticle.position.y + 30);
+        Store.view.posDropY = (Store.reticle.position.y);
+        Store.view.posDropZ = (Store.reticle.position.z);
 
+        // Store.view.posDropX = cylinderMesh.position.x;
+        // Store.view.posDropY = (cylinderMesh.position.y + 30);
+        // // Store.view.posDropZ = (cylinderMesh.position.z - 30);
+        // Store.view.posDropZ = (cylinderMesh.position.z);
+
+        // greenScreenVideoObject.position.copy(Store.reticle.position);
+        // greenScreenVideoObject.position.setX(Store.reticle.position.x);
+        // greenScreenVideoObject.position.setY(Store.reticle.position.y);
+        // greenScreenVideoObject.position.setZ(Store.reticle.position.z);
+
+        console.log({greenScreenSize});
+        // physics.initGroundContactMaterial([0, -12.5, -12], [18, 30, 0.5]);
+        // physics.initGroundContactMaterial(reticleCurrentPosition, [18, 6, 0.5]);
+        physics.initGroundContactMaterial(reticleCurrentPosition, greenScreenSize);
+
+        // size: 0.8, 1, 0.01
+        
         setTimeout(() => {
             greenScreenMaterial.startVideo();
         }, 3000);

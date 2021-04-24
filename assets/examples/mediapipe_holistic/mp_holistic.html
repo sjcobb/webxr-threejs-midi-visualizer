@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <!-- https://codepen.io/sjcobb/pen/BapMRQP -->
+    <meta charset="utf-8">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="demo.css" crossorigin="anonymous"> -->
+    <link rel="stylesheet" type="text/css" href="./mp_holistic.css">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.1/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic@0.1/holistic.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <video class="input_video"></video>
+        <canvas class="output_canvas" width="1280px" height="720px"></canvas>
+        <div class="loading">
+            <div class="spinner"></div>
+            <div class="message">
+            Loading
+            </div>
+        </div>
+        <a class="abs logo" href="http://www.mediapipe.dev" target="_blank">
+            <div style="display: flex;align-items: center;bottom: 0;right: 10px;">
+            <img class="logo" src="logo_white.png" alt="" style="
+                height: 50px;">
+            <span class="title">MediaPipe</span>
+            </div>
+        </a>
+        <div class="shoutout">
+            <div>
+            <a href="https://code.mediapipe.dev/codepen/holistic">
+                Click here to edit in CodePen
+            </a>
+            </div>
+            <div>
+            <a href="https://solutions.mediapipe.dev/holistic">
+                Click here for more info
+            </a>
+            </div>
+        </div>
+        </div>
+        <div class="control-panel">
+    </div>
+
+    <script src="./mp_holistic.js"></script>
+</body>
+
+</html>

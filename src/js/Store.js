@@ -120,10 +120,7 @@ export default {
     dropCoordCircle: [],
     dropCoordCircleInterval: [],
     dropOffset: 0,
-    // dropPosX: 5.5, //prev
-    dropPosX: 0,
-    dropPosY: 0,
-    //  dropPosZ: 0, // should z be swapped with y?
+    
     drumsOnly: false,
     errorText: '',
     errorGeo: '',
@@ -171,6 +168,8 @@ export default {
     },
     // renderer: new THREE.WebGLRenderer(),
     renderer: new THREE.WebGLRenderer({ alpha: true, antialias: true }),
+    reticle: null,
+    reticleMesh: null,
     sampler: {
         strings: {},
         guitar: {},
@@ -201,11 +200,26 @@ export default {
         skybox: false,
         cameraPositionBehind: true,
         cameraAutoStart: true,
-        hideFloor: true,
+        hideFloor: false,
         floorTexture: false,
-        posBehindX: -95, 
-        posBehindY: 4,
+        // posBehindX: -95, 
+        posBehindY: 30,
         posBehindZ: 0,
+
+        posDropX: 0,
+        posDropY: 30,
+        posDropZ: -30,
+
+        posDropMatrix: null,
+        posDrop: null,
+
+        // posLandX: 0,
+        posLandY: -10,
+        // posLandZ: -30,
+
+        reticleDebugMode: false,
+        reticleSelected: false,
+
         songAutoStart: true,
         showDashboard: false,
         showHitMarker: true,
