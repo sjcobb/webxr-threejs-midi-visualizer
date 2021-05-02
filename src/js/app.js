@@ -270,7 +270,7 @@ objCenter.position.set(0, 3, -29);
 const video = document.getElementById('human-keyboard-video');
 console.log(video);
 if (video != null) {
-    // // video.src = "URL for your video file goes here";
+    // // // video.src = "URL for your video file goes here";
     // video.load();
     // video.play();
 
@@ -730,7 +730,18 @@ function onSelect() {
         console.log({greenScreenSize});
         // physics.initGroundContactMaterial([0, -12.5, -12], [18, 30, 0.5]);
         // physics.initGroundContactMaterial(reticleCurrentPosition, [18, 6, 0.5]);
-        physics.initGroundContactMaterial(reticleCurrentPosition, greenScreenSize);
+        // physics.initGroundContactMaterial(reticleCurrentPosition, greenScreenSize); // TODO: instead of adding ground, add Cannon material to video mesh
+
+        const cannonPosArr = [0, Store.view.posLandY, -29]
+        const cannonShapeSizeArr = [18, 6, 0.5];
+        const cannonShape = new CANNON.Box(new CANNON.Vec3(...cannonShapeSizeArr));
+        const cannonMaterial = new CANNON.Material({ restitution: 1, friction: 1 });
+        const cannonBody = new CANNON.Body({ mass: 0, material: cannonMaterial });
+        cannonBody.position.set(...cannonPosArr);
+        cannonBody.addShape(cannonShape);
+        Store.world.add(cannonBody);
+
+        cannonBody.threemesh = cylinderMesh;
 
         // size: 0.8, 1, 0.01
         
@@ -739,10 +750,15 @@ function onSelect() {
         }, 3000);
         
         // console.log('onSelect -> greenScreenVideoObject: ', greenScreenVideoObject);
-        // greenScreenMaterial.update();
+        greenScreenMaterial.update();
     }
 }
 console.log('Store.camera.position: ', Store.camera.position);
+
+setTimeout(() => {
+    Store.reticle.visible = true; // for debug
+    onSelect();
+}, 4000);
 
 function addARObjectAt(matrix) {
     let newFlower = arObject.clone();

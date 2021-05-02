@@ -118,6 +118,13 @@ https://forum.playcanvas.com/t/webxr-hand-tracking/14131
 
 ## Misc
 
+### Real-time animation
+
+- https://tympanus.net/codrops/2019/10/14/how-to-create-an-interactive-3d-character-with-three-js/
+- https://codepen.io/sjcobb/pen/oNBmZrz
+
+### Music Theory
+
 - https://www.hooktheory.com/theorytab
 - https://www.hooktheory.com/theorytab/common-chord-progressions
 - Stepwise Bass Up -- chord progression

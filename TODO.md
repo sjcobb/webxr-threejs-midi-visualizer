@@ -2,16 +2,25 @@
 
 ## XR - Human mesh video
 
-- [ ] balls top right angled drop point
+- [x] map videoTexture mesh to Cannon rigid body physic object
+- [x] detect collisions with video mesh, play note on collide
+- [x] balls need to be coupled to reticle piano placement
+
 - [ ] balls scale should match indiv key hit
-- [ ] balls need to be coupled to reticle keyboard placement
-- [ ] touch up keyboard rotoscope in DaVinci Fusion
+
+- [ ] balls should drop from top right angled spawn point
+- [ ] fix canvas viewport top cutoff
+- [ ] stream 1 minute long video to video mesh
+- [ ] touch up piano rotoscope in DaVinci Fusion
+
+- [ ] why two render loops?
+
 - [ ] positional audio as camera moves
 - [ ] reticle debug mode to show visible marker
-- [ ] reticle keyboard should always be at straight ahead angle
+- [ ] reticle piano should always be at straight ahead angle
     - see line: Store.reticle.matrix.fromArray(hit.getPose(referenceSpace).transform.matrix);
-- [ ] fix canvas viewport top cutoff
-- [ ] how to play 1 minute long video
+
+- Research: how to play 1 minute long video? 
   - node fs.createReadStream
     - https://www.geeksforgeeks.org/how-to-stream-large-mp4-files/
     - https://betterprogramming.pub/video-stream-with-node-js-and-html5-320b3191a6b6
@@ -29,6 +38,12 @@
 - [ ] Call from addBody with setTimeout for balls so there is time to calc chord
 
 ## XR - Live animation using Google MediaPipe API
+
+- [ ] use 'MediaPipe - Holistic' [Pen](https://codepen.io/sjcobb/pen/BapMRQP) as starting point
+- [ ] combine with threejs example webgl_animation_skinning_additive_blending
+- [ ] pull in desired Miximo model
+- [ ] map Miximo model's joints to return data from MediaPipe graph
+- [ ] performance testing
 
 - https://github.com/google/mediapipe/issues/1586 | Weird results.multiHandedness[0].index in JavaScript
 - https://github.com/beemsoft/webxr-handtracking-playground

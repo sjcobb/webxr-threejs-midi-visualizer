@@ -39,9 +39,9 @@ export default class Physics {
 
         // this.animate();
 
-        // // this.initGroundContactMaterial([0, -8, -29], [18, 6, 0.5]); // hallway vid
+        // // // this.initGroundContactMaterial([0, -8, -29], [18, 6, 0.5]); // hallway vid
         // this.initGroundContactMaterial([0, Store.view.posLandY, -29], [18, 6, 0.5]); // first bounce
-        // this.initGroundContactMaterial([0, -12.5, -12], [18, 30, 0.5]); // 2nd bounce
+        // // this.initGroundContactMaterial([0, -12.5, -12], [18, 30, 0.5]); // 2nd bounce
 
         // this.addSpinner();
     }
@@ -218,11 +218,11 @@ export default class Physics {
         if (Store.view.reticleSelected === true) {
             xPos = Store.view.posDropX;
         }
-        console.log({xPos});
+        // console.log({xPos});
         
         // zPos = -30;
         zPos = Store.view.posDropZ; // -30
-        console.log({zPos});
+        // console.log({zPos});
 
         body.position.set((sphere) ? -xPos : xPos, yPos, zPos);
 

@@ -201,7 +201,9 @@ export default {
         cameraPositionBehind: true,
         cameraAutoStart: true,
         hideFloor: false,
-        floorTexture: false,
+        
+        floorTexture: false, // doesn't work, was used for earthquake video
+
         // posBehindX: -95, 
         posBehindY: 30,
         posBehindZ: 0,
