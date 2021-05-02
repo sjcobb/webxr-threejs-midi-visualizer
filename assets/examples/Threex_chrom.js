@@ -69,4 +69,5 @@ THREEx.ChromaKeyMaterial = function (url, keyColor) {
     });
 };
 
+// https://threejs.org/docs/#api/en/materials/ShaderMaterial
 THREEx.ChromaKeyMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype);

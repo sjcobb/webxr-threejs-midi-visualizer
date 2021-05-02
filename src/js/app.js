@@ -690,8 +690,9 @@ greenScreenSize = [8, 16, 1];
 
 const cylinderGeo = new THREE.CylinderGeometry(0.1, 0.1, 0.2, 32).translate(0, 0.1, 0);
 
-// const greenScreenGeo = new THREE.BoxGeometry(0.2, 0.3, 0.01).translate(0, 0.1, 0);
-const greenScreenGeo = new THREE.BoxGeometry(...greenScreenSize).translate(0, 0.1, 0);
+// // const greenScreenGeo = new THREE.BoxGeometry(...greenScreenSize).translate(0, 0.1, 0); // works but quad sided
+// const greenScreenGeo = new THREE.PlaneGeometry(...greenScreenSize).translate(0, 0.1, 0);
+const greenScreenGeo = new THREE.PlaneGeometry(...greenScreenSize);
 
 function onSelect() {
     console.log('XR controller -> onSelect()...');
@@ -754,6 +755,8 @@ function onSelect() {
         const cannonMaterial = new CANNON.Material({ restitution: 1, friction: 1 });
         const cannonBody = new CANNON.Body({ mass: 0, material: cannonMaterial });
         cannonBody.position.set(...cannonPosArr);
+        // cannonBody.position.setFromMatrixPosition(Store.reticle.matrix); // ERR: cannonBody.position.setFromMatrixPosition is not a function
+        
         cannonBody.addShape(cannonShape);
         Store.world.add(cannonBody);
         cannonBody.threemesh = cylinderMesh;
@@ -767,16 +770,16 @@ function onSelect() {
         // console.log('onSelect -> greenScreenVideoObject: ', greenScreenVideoObject);
         greenScreenMaterial.update();
 
-        console.log(Store);
+        console.log('onSelect -> Store: ', Store);
     }
 }
 console.log('Store.camera.position: ', Store.camera.position);
 
-// setTimeout(() => {
-//     Store.reticle.visible = true; // for debug
-//     onSelect();
-//     console.log(Store);
-// }, 4000);
+setTimeout(() => {
+    Store.reticle.visible = true; // for debug
+    onSelect();
+    console.log(Store);
+}, 4000);
 
 function addARObjectAt(matrix) {
     let newFlower = arObject.clone();
