@@ -728,12 +728,13 @@ function onSelect() {
         // greenScreenVideoObject.position.setZ(Store.reticle.position.z);
 
         console.log({greenScreenSize});
-        // physics.initGroundContactMaterial([0, -12.5, -12], [18, 30, 0.5]);
-        // physics.initGroundContactMaterial(reticleCurrentPosition, [18, 6, 0.5]);
         // physics.initGroundContactMaterial(reticleCurrentPosition, greenScreenSize); // TODO: instead of adding ground, add Cannon material to video mesh
 
-        const cannonPosArr = [0, Store.view.posLandY, -29]
-        const cannonShapeSizeArr = [18, 6, 0.5];
+        // const cannonPosArr = [0, Store.view.posLandY, -29];
+        const cannonPosArr = reticleCurrentPosition;
+        // const cannonShapeSizeArr = [18, 6, 0.5];
+        const cannonShapeSizeArr = greenScreenSize;
+
         const cannonShape = new CANNON.Box(new CANNON.Vec3(...cannonShapeSizeArr));
         const cannonMaterial = new CANNON.Material({ restitution: 1, friction: 1 });
         const cannonBody = new CANNON.Body({ mass: 0, material: cannonMaterial });
@@ -755,10 +756,10 @@ function onSelect() {
 }
 console.log('Store.camera.position: ', Store.camera.position);
 
-setTimeout(() => {
-    Store.reticle.visible = true; // for debug
-    onSelect();
-}, 4000);
+// setTimeout(() => {
+//     Store.reticle.visible = true; // for debug
+//     onSelect();
+// }, 4000);
 
 function addARObjectAt(matrix) {
     let newFlower = arObject.clone();
