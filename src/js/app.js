@@ -664,6 +664,8 @@ function render(timestamp, frame) {
                     const hit = hitTestResults[0];
                     Store.reticle.visible = true;
                     const hitMatrixPos = hit.getPose(referenceSpace).transform.matrix;
+                    Store.hitMatrixPos = hitMatrixPos;
+
                     Store.reticle.matrix.fromArray(hitMatrixPos); // TODO: place reticleMesh using static angle 
                 } else {
                     if (Store.reticleDebugMode !== true) {
@@ -764,6 +766,8 @@ function onSelect() {
         
         // console.log('onSelect -> greenScreenVideoObject: ', greenScreenVideoObject);
         greenScreenMaterial.update();
+
+        console.log(Store);
     }
 }
 console.log('Store.camera.position: ', Store.camera.position);
@@ -771,6 +775,7 @@ console.log('Store.camera.position: ', Store.camera.position);
 // setTimeout(() => {
 //     Store.reticle.visible = true; // for debug
 //     onSelect();
+//     console.log(Store);
 // }, 4000);
 
 function addARObjectAt(matrix) {
