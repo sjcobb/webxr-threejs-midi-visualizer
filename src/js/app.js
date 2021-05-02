@@ -679,9 +679,15 @@ function render(timestamp, frame) {
 // https://threejs.org/examples/webxr_vr_rollercoaster.html
 // https://github.com/mrdoob/three.js/blob/master/examples/webxr_ar_hittest.html#L59
 
-const greenScreenSize = [0.8, 1, 0.01];
+let greenScreenSize = [0.8, 1, 0.01];
+greenScreenSize = [8, 16, 1];
+// greenScreenSize = [20, 30, 2];
+// greenScreenSize = [18, 6, 0.5];
+
+// [18, 6, 0.5];
+
 const cylinderGeo = new THREE.CylinderGeometry(0.1, 0.1, 0.2, 32).translate(0, 0.1, 0);
-// const greenScreenGeo = new THREE.BoxGeometry(20, 30, 2);
+
 // const greenScreenGeo = new THREE.BoxGeometry(0.2, 0.3, 0.01).translate(0, 0.1, 0);
 const greenScreenGeo = new THREE.BoxGeometry(...greenScreenSize).translate(0, 0.1, 0);
 
@@ -696,12 +702,15 @@ function onSelect() {
         Store.view.posDropMatrix = Store.reticle.matrix;
 
         greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
+        // const videoMaterial = new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
         const cylinderMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
+
+
         const cylinderMesh = new THREE.Mesh(greenScreenGeo, greenScreenMaterial);
         cylinderMesh.position.setFromMatrixPosition(Store.reticle.matrix);
         console.log('PRE cylinderMesh.position: ', cylinderMesh.position);
 
-        cylinderMesh.scale.y = Math.random() * 2 + 1;
+        // // cylinderMesh.scale.y = Math.random() * 2 + 1;
         Store.scene.add(cylinderMesh);
 
         // https://threejs.org/docs/#api/en/math/Vector3
@@ -713,8 +722,8 @@ function onSelect() {
 
         // TODO: why do balls not drop from same location as reticle?
         Store.view.posDropX = Store.reticle.position.x;
-        // Store.view.posDropY = (Store.reticle.position.y + 30);
-        Store.view.posDropY = (Store.reticle.position.y);
+        Store.view.posDropY = (Store.reticle.position.y + 30);
+        // Store.view.posDropY = (Store.reticle.position.y);
         Store.view.posDropZ = (Store.reticle.position.z);
 
         // Store.view.posDropX = cylinderMesh.position.x;
@@ -732,8 +741,12 @@ function onSelect() {
 
         // const cannonPosArr = [0, Store.view.posLandY, -29];
         const cannonPosArr = reticleCurrentPosition;
+        // cannonPosArr[1] -= 20; // moves everything
+
         // const cannonShapeSizeArr = [18, 6, 0.5];
         const cannonShapeSizeArr = greenScreenSize;
+        // cannonShapeSizeArr[1] = (cannonShapeSizeArr[1] / 2); // no effect
+        cannonShapeSizeArr[1] = 1;
 
         const cannonShape = new CANNON.Box(new CANNON.Vec3(...cannonShapeSizeArr));
         const cannonMaterial = new CANNON.Material({ restitution: 1, friction: 1 });
@@ -741,7 +754,6 @@ function onSelect() {
         cannonBody.position.set(...cannonPosArr);
         cannonBody.addShape(cannonShape);
         Store.world.add(cannonBody);
-
         cannonBody.threemesh = cylinderMesh;
 
         // size: 0.8, 1, 0.01
