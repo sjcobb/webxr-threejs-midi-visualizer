@@ -113,12 +113,9 @@ export default class Physics {
         if (objSize === 'xl') {
             objSize = 2.0;
         } else {
-            // objSize = 0.5; // v0.3
-            // objSize = 0.65; // too big for D maj chord
-            // objSize = 0.50; // jazzhands
-            // objSize = 0.33; // same as ball pit?
-            objSize = 0.38; //
+            // objSize = 0.38; // PREV
             // objSize = 0.1;
+            objSize = 0.07;
         }
 
         // console.log('addBody -> options: ', options);
@@ -158,8 +155,9 @@ export default class Physics {
 
         // https://schteppe.github.io/cannon.js/docs/classes/Body.html
         // const body = new CANNON.Body({ mass: 5, material: material }); // v0.3, v0.4
-        const body = new CANNON.Body({ mass: 550, material: material });
-        
+        // const body = new CANNON.Body({ mass: 550, material: material }); // genmusic
+        const body = new CANNON.Body({ mass: 5000, material: material }); 
+
         this.shapes = {};
         // this.shapes.sphere = new CANNON.Sphere(0.5);
         this.shapes.sphere = new CANNON.Sphere(objSize);
@@ -194,6 +192,11 @@ export default class Physics {
 
         let zPos;
         zPos = options.originalPosition !== undefined ? options.originalPosition.z : Store.view.posDropZ;
+        
+        // zPos = zPos * 0.25;
+        // zPos = zPos * 0.75;
+
+        // zPos -= 30;
         // console.log(zPos);
 
         // body.mass = 1; // feather light
@@ -216,7 +219,7 @@ export default class Physics {
         xPos = (options.originalPosition.z - 0);
 
         if (Store.view.reticleSelected === true) {
-            xPos = Store.view.posDropX;
+            // xPos = Store.view.posDropX;
         }
         // console.log({xPos});
         
@@ -240,7 +243,7 @@ export default class Physics {
         // body.angularVelocity.z = options.size === 'xl' ? 8 : 0; 
         
         // body.angularVelocity.z = 24; // for sideways spin
-        body.angularVelocity.x = 24; // USE
+        // body.angularVelocity.x = 24; // USE
 
         if (options.type === 'animation') {
             flamePhysics.create({x: -xPos});

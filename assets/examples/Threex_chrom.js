@@ -8,6 +8,7 @@ THREEx.ChromaKeyMaterial = function (url, keyColor) {
     video = document.createElement('video');
     video.src = url;
     video.load();
+    video.muted = true;
     console.log(video);
 
     var keyColorObject = new THREE.Color(keyColor);

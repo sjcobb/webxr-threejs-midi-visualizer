@@ -698,7 +698,7 @@ function onSelect() {
     console.log('XR controller -> onSelect()...');
     Store.view.reticleSelected = true;
 
-    physics.addBody(true, Store.view.posDropX);
+    // physics.addBody(true, Store.view.posDropX); 
 
     if (Store.reticle.visible) {
         console.log('Store.reticle: ', Store.reticle);

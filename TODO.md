@@ -2,18 +2,24 @@
 
 ## XR - Human mesh video
 
-- [x] map videoTexture mesh to Cannon rigid body physic object
-- [x] detect collisions with video mesh, play note on collide
-- [x] balls need to be coupled to reticle piano placement
-
+- [ ] balls need to be coupled to reticle piano placement
 - [ ] balls scale should match indiv key hit
-
 - [ ] balls should drop from top right angled spawn point
-- [ ] fix canvas viewport top cutoff
 - [ ] stream 1 minute long video to video mesh
 - [ ] touch up piano rotoscope in DaVinci Fusion
 
-- [ ] why two render loops?
+### Bugs 
+
+- [ ] fix canvas viewport top cutoff
+- [ ] two separate render loops for xr vs. reg three scene not necessary
+  - could be why reticle placement doesn't match greenScreenMaterial (hitMatrixPos, cannonPosArr)
+
+### Completed
+
+- [x] map videoTexture mesh to Cannon rigid body physic object
+- [x] detect collisions with video mesh, play note on collide
+
+### Future enhancements
 
 - [ ] positional audio as camera moves
 - [ ] reticle debug mode to show visible marker

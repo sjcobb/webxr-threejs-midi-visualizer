@@ -536,7 +536,11 @@ const recordingPart = new Tone.Part(function(time, datum){
 
     // instrMapped.originalPosition.z -= 15;
     // instrMapped.originalPosition.z -= 18;
-    instrMapped.originalPosition.z += 5;
+    // instrMapped.originalPosition.z += 5; // prev
+    // instrMapped.originalPosition.z += 1;
+    // instrMapped.originalPosition.z += 10;
+    // instrMapped.originalPosition.z = (instrMapped.originalPosition.z * 0.5); // works
+    instrMapped.originalPosition.z = (instrMapped.originalPosition.z * 0.35);
 
     instrMapped.duration = datum.duration
     // instrMapped.duration = datum.duration * 0.6;
@@ -555,7 +559,7 @@ const recordingPart = new Tone.Part(function(time, datum){
 // }, recordingThirdNotes);  // alphabet song
 
 // recordingPart.volume.value = -18;
-recordingPart.loop = true;
+// recordingPart.loop = true;
 // recordingPart.loop = 2;
 
 //recordingPart.playbackRate = 0.9;
