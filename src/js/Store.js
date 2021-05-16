@@ -203,7 +203,7 @@ export default {
         skybox: false,
         cameraPositionBehind: true,
         cameraAutoStart: true,
-        hideFloor: false,
+        hideFloor: true,
         
         floorTexture: false, // doesn't work, was used for earthquake video
 
