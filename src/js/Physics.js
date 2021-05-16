@@ -43,6 +43,7 @@ export default class Physics {
         // this.initGroundContactMaterial([0, Store.view.posLandY, -29], [18, 6, 0.5]); // first bounce
         // // this.initGroundContactMaterial([0, -12.5, -12], [18, 30, 0.5]); // 2nd bounce
 
+        // this.initGroundContactMaterial([0, Store.view.posLandY, -29], [18, 6, 0.5])
         // this.addSpinner();
     }
 
@@ -216,7 +217,8 @@ export default class Physics {
         //     }
         // }
 
-        xPos = (options.originalPosition.z - 0);
+        xPos = (options.originalPosition.z - 0); // left to right pos of balls
+        // xPos = (options.originalPosition.z + 10); // spreads out balls too much
 
         if (Store.view.reticleSelected === true) {
             // xPos = Store.view.posDropX;
@@ -224,7 +226,16 @@ export default class Physics {
         // console.log({xPos});
         
         // zPos = -30;
-        zPos = Store.view.posDropZ; // -30
+        // zPos = Store.view.posDropZ; // -30
+
+        // zPos = -27;
+
+        // zPos = (options.originalPosition.z - 0); 
+        
+        zPos = (xPosition - 30);
+        // zPos = (xPosition - 22); // better, more balls visible
+        // zPos = (xPosition - 20); // too high
+        // zPos = (xPosition - 16); // worse, tooo high
         // console.log({zPos});
 
         body.position.set((sphere) ? -xPos : xPos, yPos, zPos);

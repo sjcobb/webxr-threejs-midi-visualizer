@@ -605,7 +605,7 @@ if (Store.view.showHitMarker === true) {
     // Store.reticle.position.set(Store.view.posDropX, 10, Store.view.posDropZ);
     
     // Store.reticle.position.set(0, 0, Store.view.posDropZ);
-    Store.reticle.position.set(0, Store.view.posLandY, Store.view.posDropZ);
+    Store.reticle.position.set(0, Store.view.posLandY, Store.view.posDropZ); // TODO: hmesh pos fix
 
     const currentReticlePosition = Store.reticle.position;
     console.log({currentReticlePosition});
@@ -685,7 +685,8 @@ let greenScreenSize = [0.8, 1, 0.01];
 // greenScreenSize = [8, 16, 1]; // too small
 // greenScreenSize = [10, 18, 1];
 // greenScreenSize = [14, 28, 1]; // width, height, depth
-greenScreenSize = [23, 50, 1]; // width, height, depth
+// greenScreenSize = [23, 50, 1];
+greenScreenSize = [23, 50, 10]; // width, height, depth
 
 // greenScreenSize = [20, 30, 2];
 // greenScreenSize = [18, 6, 0.5];
@@ -713,6 +714,7 @@ function onSelect() {
         const cylinderMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
 
         const cylinderMesh = new THREE.Mesh(greenScreenGeo, greenScreenMaterial);
+        // const cylinderMesh = new THREE.Mesh(greenScreenGeo, cylinderMaterial);
         cylinderMesh.position.setFromMatrixPosition(Store.reticle.matrix);
         console.log('PRE cylinderMesh.position: ', cylinderMesh.position);
 
@@ -756,7 +758,8 @@ function onSelect() {
         // // [23, 50, 1]
 
         // cannonShapeSizeArr[1] = (cannonShapeSizeArr[1] / 2); // no effect
-        cannonShapeSizeArr[1] = 1;
+        // cannonShapeSizeArr[1] = 1; // balls land too low
+        cannonShapeSizeArr[1] = 6; // important -> kind of works
 
         const cannonShape = new CANNON.Box(new CANNON.Vec3(...cannonShapeSizeArr));
         const cannonMaterial = new CANNON.Material({ restitution: 1, friction: 1 });

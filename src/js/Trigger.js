@@ -525,6 +525,8 @@ const recordingPart = new Tone.Part(function(time, datum){
     // console.log(datum);
 
     const instrMapped = generateInstrMetadata(datum.name);
+    console.log(instrMapped);
+    instrMapped.midi = datum.midi;
 
     // instrMapped.color = '#008b8b';
     // instrMapped.color = '#800000'; // dkred
@@ -534,12 +536,11 @@ const recordingPart = new Tone.Part(function(time, datum){
     instrMapped.color = '#FFFF00'; // yellow
     // instrMapped.color = '#081953'; // dkblue (ball pit blue)
 
-    // instrMapped.originalPosition.z -= 15;
-    // instrMapped.originalPosition.z -= 18;
     // instrMapped.originalPosition.z += 5; // prev
-    // instrMapped.originalPosition.z += 1;
-    // instrMapped.originalPosition.z += 10;
     // instrMapped.originalPosition.z = (instrMapped.originalPosition.z * 0.5); // works
+    // instrMapped.originalPosition.x = (instrMapped.originalPosition.z + 8); // too wide
+    instrMapped.originalPosition.x = (instrMapped.originalPosition.z + 14); // important, very close diag landing
+    // instrMapped.originalPosition.x = (instrMapped.originalPosition.z + 18); // too straight vertically
 
     instrMapped.originalPosition.z += 10;
     instrMapped.originalPosition.z = (instrMapped.originalPosition.z * 0.35);
@@ -553,7 +554,8 @@ const recordingPart = new Tone.Part(function(time, datum){
     // instrMapped.variation = 'violin';
     // instrMapped.variation = 'piano';
 
-    physics.addBody(true, Store.view.posDropX, instrMapped, 0);
+    // physics.addBody(true, Store.view.posDropX, instrMapped, 0); // prev
+    physics.addBody(true, instrMapped.originalPosition.x, instrMapped, 0); 
 
 }, Store.recording.parts[0]);
 // }, recordingFirstNotes);      // twinkle twinkle little star

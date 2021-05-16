@@ -211,7 +211,8 @@ export default {
         posBehindY: 30,
         posBehindZ: 0,
 
-        posDropX: 0,
+        // posDropX: -2500,
+        posDropX: undefined,
         posDropY: 30,
         posDropZ: -30,
 
@@ -219,7 +220,9 @@ export default {
         posDrop: null,
 
         // posLandX: 0,
-        posLandY: -10,
+        // posLandY: -10, // too low
+        // posLandY: 10, // keyboard too high
+        posLandY: 0,
         // posLandZ: -30,
 
         reticleDebugMode: false,
