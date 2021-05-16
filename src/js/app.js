@@ -760,6 +760,7 @@ function onSelect() {
         // cannonShapeSizeArr[1] = (cannonShapeSizeArr[1] / 2); // no effect
         // cannonShapeSizeArr[1] = 1; // balls land too low
         cannonShapeSizeArr[1] = 6; // important -> kind of works
+        cannonShapeSizeArr[0, 0, 0];
 
         const cannonShape = new CANNON.Box(new CANNON.Vec3(...cannonShapeSizeArr));
         const cannonMaterial = new CANNON.Material({ restitution: 1, friction: 1 });
@@ -768,7 +769,7 @@ function onSelect() {
         // cannonBody.position.setFromMatrixPosition(Store.reticle.matrix); // ERR: cannonBody.position.setFromMatrixPosition is not a function
         
         cannonBody.addShape(cannonShape);
-        Store.world.add(cannonBody);
+        // Store.world.add(cannonBody);
         cannonBody.threemesh = cylinderMesh;
 
         // size: 0.8, 1, 0.01

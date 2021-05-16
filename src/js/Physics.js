@@ -43,7 +43,7 @@ export default class Physics {
         // this.initGroundContactMaterial([0, Store.view.posLandY, -29], [18, 6, 0.5]); // first bounce
         // // this.initGroundContactMaterial([0, -12.5, -12], [18, 30, 0.5]); // 2nd bounce
 
-        // this.initGroundContactMaterial([0, Store.view.posLandY, -29], [18, 6, 0.5])
+        this.initGroundContactMaterial([0, -5, -29], [30, 60, 0.5])
         // this.addSpinner();
     }
 
@@ -85,10 +85,11 @@ export default class Physics {
 
         groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2); //PREV
         // groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0.5, 0, 0), -Math.PI / 2); // invisible giant hill
+        // groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0.5, 0, 0), -Math.PI / 2);
 
         // groundBody.position.set(0, -6, 0);
         groundBody.position.set(...posArr);
-        // console.log({groundBody});
+        console.log({groundBody});
 
         // https://stackoverflow.com/a/35101095 - “Glueing together” two bodies in cannon.js
         groundBody.addShape(groundShape);
@@ -217,8 +218,8 @@ export default class Physics {
         //     }
         // }
 
-        xPos = (options.originalPosition.z - 0); // left to right pos of balls
-        // xPos = (options.originalPosition.z + 10); // spreads out balls too much
+        // xPos = (options.originalPosition.z - 0); // left to right pos of balls
+        xPos = (options.originalPosition.z + 10); // spreads out balls too much
 
         if (Store.view.reticleSelected === true) {
             // xPos = Store.view.posDropX;

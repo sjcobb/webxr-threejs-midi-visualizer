@@ -123,12 +123,14 @@ export function getInstrByNote(inputNote = 'C4') {
     const instrumentMapping = getInstrumentMappingTemplate();
 
     // for (const [i, key] of instrumentMapping.entries()) { // err
-    let keyIndex = 0;
+    let posIndex = 0;
+    let negIndex = 0;
 
     for (var key in instrumentMapping) {
         if (instrumentMapping.hasOwnProperty(key)) {
 
-            keyIndex++;
+            posIndex++;
+            negIndex--;
 
             // const instrNote = obj.userData.opts.note + obj.userData.opts.octave;
             const instrNote = inputNote;
@@ -142,7 +144,8 @@ export function getInstrByNote(inputNote = 'C4') {
                 const instrumentMappedObj = instrumentMapping[key];
                 // console.log({instrumentMappedObj});
 
-                instrumentMappedObj.index = keyIndex;
+                instrumentMappedObj.posIndex = posIndex;
+                instrumentMappedObj.negIndex = negIndex;
                 return instrumentMappedObj;
             }
 
