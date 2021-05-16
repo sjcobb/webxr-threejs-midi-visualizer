@@ -43,7 +43,9 @@ export default class Physics {
         // this.initGroundContactMaterial([0, Store.view.posLandY, -29], [18, 6, 0.5]); // first bounce
         // // this.initGroundContactMaterial([0, -12.5, -12], [18, 30, 0.5]); // 2nd bounce
 
-        this.initGroundContactMaterial([0, -5, -29], [30, 60, 0.5])
+        // this.initGroundContactMaterial([0, -5, -29], [30, 60, 0.5]);
+        this.initGroundContactMaterial([0, -1, -29], [30, 60, 0.5]);
+
         // this.addSpinner();
     }
 
@@ -161,7 +163,6 @@ export default class Physics {
         const body = new CANNON.Body({ mass: 5000, material: material }); 
 
         this.shapes = {};
-        // this.shapes.sphere = new CANNON.Sphere(0.5);
         this.shapes.sphere = new CANNON.Sphere(objSize);
         this.shapes.box = new CANNON.Box(new CANNON.Vec3(0.5, 0.5, 0.5));
 
@@ -171,73 +172,13 @@ export default class Physics {
             body.addShape(this.shapes.box);
         }
 
-        let xRand = Math.random() * (15 - 1) + 1; //rdm b/w 1 and 15
         let xPos = xPosition; //TODO: remove xPosition param if not used
+        // xPos = (xPosition + 10);
+        xPos = (xPosition + 5);
         
-        // if (Store.view.autoScroll === true) {
-        //     if (options.type === 'drum') {
-        //         xPos = -(Store.ticks);
-        //     } else {
-        //         xPos = -(Store.ticks);
-        //         Store.InstrumentCounter++;
-        //     }
-        // }
-
-        // https://stackoverflow.com/questions/44630265/how-can-i-set-z-up-coordinate-system-in-three-js
-        // const yPos = 20; // v0.4, v0.5
-        // const yPos = 1;
-        // const yPos = 30;
         const yPos = Store.view.posDropY; // 30
 
-        /*** Randomized Y drop point ***/
-        // const y = Math.random() * (10 - 5) + 5; //rdm b/w 5 and 10
-
-        let zPos;
-        zPos = options.originalPosition !== undefined ? options.originalPosition.z : Store.view.posDropZ;
-        
-        // zPos = zPos * 0.25;
-        // zPos = zPos * 0.75;
-
-        // zPos -= 30;
-        // console.log(zPos);
-
-        // body.mass = 1; // feather light
-        // body.mass = 8; // heavy
-
-        // if (options.type === 'drum') {
-        //     // TODO: new drum machine paradigm - use rotating clock hand to hit drums
-        //     // https://codepen.io/danlong/pen/LJQYYN
-        //     // zPos += 10; // PREV: see Store.staffLineInitZ and Store.staffLineSecondZ
-
-        //     // zPos -= 8; // TODO: is this still needed?
-        // } else {
-        //     // zPos -= 3; // v0.4, v0.5
-
-        //     if (Store.view.showStaff.treble === true) {
-        //         zPos += 2;
-        //     }
-        // }
-
-        // xPos = (options.originalPosition.z - 0); // left to right pos of balls
-        xPos = (options.originalPosition.z + 10); // spreads out balls too much
-
-        if (Store.view.reticleSelected === true) {
-            // xPos = Store.view.posDropX;
-        }
-        // console.log({xPos});
-        
-        // zPos = -30;
-        // zPos = Store.view.posDropZ; // -30
-
-        // zPos = -27;
-
-        // zPos = (options.originalPosition.z - 0); 
-        
-        zPos = (xPosition - 30);
-        // zPos = (xPosition - 22); // better, more balls visible
-        // zPos = (xPosition - 20); // too high
-        // zPos = (xPosition - 16); // worse, tooo high
-        // console.log({zPos});
+        let zPos = (options.originalPosition.z - 40);
 
         body.position.set((sphere) ? -xPos : xPos, yPos, zPos);
 

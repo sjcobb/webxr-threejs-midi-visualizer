@@ -525,7 +525,7 @@ const recordingPart = new Tone.Part(function(time, datum){
     // console.log(datum);
 
     const instrMapped = generateInstrMetadata(datum.name);
-    console.log(instrMapped);
+    // console.log(instrMapped);
     instrMapped.midi = datum.midi;
 
     // instrMapped.color = '#008b8b';
@@ -536,30 +536,19 @@ const recordingPart = new Tone.Part(function(time, datum){
     instrMapped.color = '#FFFF00'; // yellow
     // instrMapped.color = '#081953'; // dkblue (ball pit blue)
 
-    // // instrMapped.originalPosition.z += 5; // prev
-    // // instrMapped.originalPosition.z = (instrMapped.originalPosition.z * 0.5); // works
-    // // instrMapped.originalPosition.x = (instrMapped.originalPosition.z + 8); // too wide
-    // // instrMapped.originalPosition.x = (instrMapped.originalPosition.z + 14); // important, very close diag landing
-    // // instrMapped.originalPosition.x = (instrMapped.originalPosition.z + 18); // too straight vertically
-    // instrMapped.originalPosition.x = instrMapped.posIndex; // too spread out
-    instrMapped.originalPosition.x = (instrMapped.posIndex * 0.5);
-    instrMapped.originalPosition.x + 10;
+    // instrMapped.originalPosition.x = (instrMapped.posIndex * 0.5);
+    instrMapped.originalPosition.z = (instrMapped.posIndex * 0.6);
 
-    // // instrMapped.originalPosition.z += 10;
-    // instrMapped.originalPosition.z -= 5;
-    // instrMapped.originalPosition.z = (instrMapped.originalPosition.z * 0.35); // prev, distance between balls
-    // instrMapped.originalPosition.z = (instrMapped.negIndex);
-    instrMapped.originalPosition.z = (instrMapped.negIndex);
+    instrMapped.originalPosition.x = (instrMapped.negIndex / 4);
 
     instrMapped.duration = datum.duration
-    // instrMapped.duration = datum.duration * 0.6;
-    // instrMapped.duration = datum.duration / 2;
     // instrMapped.duration = datum.duration * 2;
 
     // instrMapped.variation = 'guitar';
     // instrMapped.variation = 'violin';
     // instrMapped.variation = 'piano';
 
+    // console.log(instrMapped.originalPosition);
     // physics.addBody(true, Store.view.posDropX, instrMapped, 0); // prev
     physics.addBody(true, instrMapped.originalPosition.x, instrMapped, 0); 
 

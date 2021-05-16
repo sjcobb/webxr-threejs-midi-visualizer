@@ -715,7 +715,10 @@ function onSelect() {
 
         const cylinderMesh = new THREE.Mesh(greenScreenGeo, greenScreenMaterial);
         // const cylinderMesh = new THREE.Mesh(greenScreenGeo, cylinderMaterial);
-        cylinderMesh.position.setFromMatrixPosition(Store.reticle.matrix);
+        // cylinderMesh.position.setFromMatrixPosition(Store.reticle.matrix);
+        
+        cylinderMesh.position.set(0, -5, -29);
+        
         console.log('PRE cylinderMesh.position: ', cylinderMesh.position);
 
         // // cylinderMesh.scale.y = Math.random() * 2 + 1;
