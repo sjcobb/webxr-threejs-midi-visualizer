@@ -537,9 +537,13 @@ const recordingPart = new Tone.Part(function(time, datum){
     // instrMapped.color = '#081953'; // dkblue (ball pit blue)
 
     // instrMapped.originalPosition.x = (instrMapped.posIndex * 0.5);
-    instrMapped.originalPosition.z = (instrMapped.posIndex * 0.6);
+    // instrMapped.originalPosition.z = (instrMapped.posIndex * 0.6);
+    // instrMapped.originalPosition.z = (instrMapped.posIndex * 0.4);
+    instrMapped.originalPosition.z = (instrMapped.posIndex * 0.9);
 
-    instrMapped.originalPosition.x = (instrMapped.negIndex / 4);
+    // instrMapped.originalPosition.x = (instrMapped.negIndex / 4);
+    // instrMapped.originalPosition.x = (instrMapped.negIndex / 6);
+    instrMapped.originalPosition.x = (instrMapped.negIndex / 6);
 
     instrMapped.duration = datum.duration
     // instrMapped.duration = datum.duration * 2;
@@ -548,7 +552,7 @@ const recordingPart = new Tone.Part(function(time, datum){
     // instrMapped.variation = 'violin';
     // instrMapped.variation = 'piano';
 
-    // console.log(instrMapped.originalPosition);
+    console.log(instrMapped.originalPosition);
     // physics.addBody(true, Store.view.posDropX, instrMapped, 0); // prev
     physics.addBody(true, instrMapped.originalPosition.x, instrMapped, 0); 
 

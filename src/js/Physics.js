@@ -178,7 +178,8 @@ export default class Physics {
         
         const yPos = Store.view.posDropY; // 30
 
-        let zPos = (options.originalPosition.z - 40);
+        // let zPos = (options.originalPosition.z - 40);
+        let zPos = (options.originalPosition.z - 30);
 
         body.position.set((sphere) ? -xPos : xPos, yPos, zPos);
 
