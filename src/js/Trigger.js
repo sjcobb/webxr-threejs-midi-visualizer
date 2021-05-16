@@ -540,6 +540,8 @@ const recordingPart = new Tone.Part(function(time, datum){
     // instrMapped.originalPosition.z += 1;
     // instrMapped.originalPosition.z += 10;
     // instrMapped.originalPosition.z = (instrMapped.originalPosition.z * 0.5); // works
+
+    instrMapped.originalPosition.z += 10;
     instrMapped.originalPosition.z = (instrMapped.originalPosition.z * 0.35);
 
     instrMapped.duration = datum.duration

@@ -682,7 +682,11 @@ function render(timestamp, frame) {
 // https://github.com/mrdoob/three.js/blob/master/examples/webxr_ar_hittest.html#L59
 
 let greenScreenSize = [0.8, 1, 0.01];
-greenScreenSize = [8, 16, 1];
+// greenScreenSize = [8, 16, 1]; // too small
+// greenScreenSize = [10, 18, 1];
+// greenScreenSize = [14, 28, 1]; // width, height, depth
+greenScreenSize = [23, 50, 1]; // width, height, depth
+
 // greenScreenSize = [20, 30, 2];
 // greenScreenSize = [18, 6, 0.5];
 
@@ -707,7 +711,6 @@ function onSelect() {
         greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
         // const videoMaterial = new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
         const cylinderMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
-
 
         const cylinderMesh = new THREE.Mesh(greenScreenGeo, greenScreenMaterial);
         cylinderMesh.position.setFromMatrixPosition(Store.reticle.matrix);
@@ -748,6 +751,10 @@ function onSelect() {
 
         // const cannonShapeSizeArr = [18, 6, 0.5];
         const cannonShapeSizeArr = greenScreenSize;
+        // const cannonShapeSizeArr = [23, 50, 1];
+        // cannonShapeSizeArr[1] - 100;
+        // // [23, 50, 1]
+
         // cannonShapeSizeArr[1] = (cannonShapeSizeArr[1] / 2); // no effect
         cannonShapeSizeArr[1] = 1;
 

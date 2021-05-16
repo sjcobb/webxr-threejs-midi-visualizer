@@ -225,6 +225,7 @@ export default {
         reticleDebugMode: false,
         reticleSelected: false,
 
+        rotateOrigin: true,
         songAutoStart: true,
         showDashboard: false,
         showHitMarker: true,

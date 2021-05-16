@@ -2,8 +2,8 @@
 
 ## XR - Human mesh video
 
-- [ ] balls need to be coupled to reticle piano placement
-- [ ] balls scale should match indiv key hit
+- [x] balls need to be coupled to reticle piano placement
+- [x] balls scale should match indiv key hit
 - [ ] balls should drop from top right angled spawn point
 - [ ] stream 1 minute long video to video mesh
 - [ ] touch up piano rotoscope in DaVinci Fusion
@@ -26,7 +26,9 @@
 - [ ] reticle piano should always be at straight ahead angle
     - see line: Store.reticle.matrix.fromArray(hit.getPose(referenceSpace).transform.matrix);
 
-- Research: how to play 1 minute long video? 
+## Research
+
+- how to play 1 minute long video? 
   - node fs.createReadStream
     - https://www.geeksforgeeks.org/how-to-stream-large-mp4-files/
     - https://betterprogramming.pub/video-stream-with-node-js-and-html5-320b3191a6b6
@@ -34,6 +36,10 @@
   - export PNG sequence from Blender?
   - access WebM stream using: https://github.com/endlesshack/youtube-video
   - CSS + iframe: https://github.com/mrdoob/three.js/blob/master/examples/css3d_youtube.html
+
+- Rotating drop landing position around A1 point
+  - https://math.stackexchange.com/questions/2204520/how-do-i-rotate-a-line-segment-in-a-specific-point-on-the-line
+  - https://math.stackexchange.com/questions/1687901/how-to-rotate-a-line-segment-around-one-of-the-end-points
 
 ## Chord Detector
 - [ ] Giant rectangle cube following balls that tells you name of chord - G7 Dominant
