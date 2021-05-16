@@ -717,7 +717,8 @@ function onSelect() {
         // const cylinderMesh = new THREE.Mesh(greenScreenGeo, cylinderMaterial);
         // cylinderMesh.position.setFromMatrixPosition(Store.reticle.matrix);
         
-        cylinderMesh.position.set(0, -5, -29);
+        // cylinderMesh.position.set(0, -5, -29); // video too high, too far back, slightly too far left
+        cylinderMesh.position.set(2, -6, -29);
         
         console.log('PRE cylinderMesh.position: ', cylinderMesh.position);
 
@@ -749,6 +750,8 @@ function onSelect() {
 
         console.log({greenScreenSize});
         // physics.initGroundContactMaterial(reticleCurrentPosition, greenScreenSize); // TODO: instead of adding ground, add Cannon material to video mesh
+
+        physics.initGroundContactMaterial([0, -1, -29], [30, 60, 0.5]);
 
         // const cannonPosArr = [0, Store.view.posLandY, -29];
         const cannonPosArr = reticleCurrentPosition;

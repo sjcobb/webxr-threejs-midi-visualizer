@@ -536,6 +536,10 @@ const recordingPart = new Tone.Part(function(time, datum){
     instrMapped.color = '#FFFF00'; // yellow
     // instrMapped.color = '#081953'; // dkblue (ball pit blue)
 
+    // TODO: how to calculate ratio of x to y, to rotate piano key positions relative to origin (A0, midi 21), aka move clock-wise
+    // TODO: how to projection map keyboard video so it creates illusion of being in-line with rotated dropped note spheres
+    // 
+    // 
     // instrMapped.originalPosition.x = (instrMapped.posIndex * 0.5);
     // instrMapped.originalPosition.z = (instrMapped.posIndex * 0.6);
     // instrMapped.originalPosition.z = (instrMapped.posIndex * 0.4);
@@ -569,7 +573,8 @@ const recordingPart = new Tone.Part(function(time, datum){
 // recordingPart.start("0:5:0");
 // recordingPart.start("0:0:0");
 console.log('pre-start -> recordingPart', recordingPart);
-recordingPart.start(0);
+// recordingPart.start(0);
+recordingPart.start(10);
 
 const recordingSecondPart = new Tone.Part(function(time, datum){
     // console.log(time);

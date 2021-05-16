@@ -122,6 +122,7 @@ export function getInstrByInputNote(note = 'C4') {
 export function getInstrByNote(inputNote = 'C4') {
     const instrumentMapping = getInstrumentMappingTemplate();
 
+    // TODO: when Store.view.rotateOrigin === true, use array instead of obj in getInstrumentMappingTemplate
     // for (const [i, key] of instrumentMapping.entries()) { // err
     let posIndex = 0;
     let negIndex = 0;

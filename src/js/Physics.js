@@ -44,7 +44,7 @@ export default class Physics {
         // // this.initGroundContactMaterial([0, -12.5, -12], [18, 30, 0.5]); // 2nd bounce
 
         // this.initGroundContactMaterial([0, -5, -29], [30, 60, 0.5]);
-        this.initGroundContactMaterial([0, -1, -29], [30, 60, 0.5]);
+        // this.initGroundContactMaterial([0, -1, -29], [30, 60, 0.5]);
 
         // this.addSpinner();
     }
