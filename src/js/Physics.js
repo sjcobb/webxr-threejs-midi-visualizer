@@ -85,12 +85,17 @@ export default class Physics {
 
         const groundBody = new CANNON.Body({ mass: 0, material: tempMaterial });
 
-        groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2); //PREV
-        // groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0.5, 0, 0), -Math.PI / 2); // invisible giant hill
-        // groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0.5, 0, 0), -Math.PI / 2);
+        // groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2); //PREV
+        // groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -1.50); // -Math.PI / 2 === -1.57
+        groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -1.40);
+
+        // // groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0.5, 0, 0), -Math.PI / 2); // invisible giant hill
+        // // groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0.5, 0, 0), -Math.PI / 2);
 
         // groundBody.position.set(0, -6, 0);
         groundBody.position.set(...posArr);
+
+        // groundBody.rotation.set(new THREE.Vector3( 0, 0, Math.PI / 2)); // error
         console.log({groundBody});
 
         // https://stackoverflow.com/a/35101095 - “Glueing together” two bodies in cannon.js
@@ -173,13 +178,12 @@ export default class Physics {
         }
 
         let xPos = xPosition; //TODO: remove xPosition param if not used
-        // xPos = (xPosition + 10);
         xPos = (xPosition + 5);
         
         const yPos = Store.view.posDropY; // 30
 
-        // let zPos = (options.originalPosition.z - 40);
-        let zPos = (options.originalPosition.z - 30);
+        // let zPos = (options.originalPosition.z - 30); // prev
+        let zPos = (options.originalPosition.z - 35);
 
         body.position.set((sphere) ? -xPos : xPos, yPos, zPos);
 
@@ -334,7 +338,8 @@ export default class Physics {
         const obj = new THREE.Object3D();
 
         // const material = this.currentMaterial; // TODO: fix floor color by refactoring currentMaterial;
-        const material = new THREE.MeshLambertMaterial({ color: 0x888888 });
+        // const material = new THREE.MeshLambertMaterial({ color: 0x888888 }); // PREV
+        const material = new THREE.MeshLambertMaterial({ color: 0x888888, opacity: 0.7, transparent: true });
 
         const game = this;
         let index = 0;
@@ -428,7 +433,10 @@ export default class Physics {
                     // floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
                     // floorTexture.repeat.set(3, 3);
 
-                    let floorMaterial = new THREE.MeshLambertMaterial({ color: 0x888888 });
+                    let floorMaterial = new THREE.MeshLambertMaterial({ color: 0x888888 }); // no effect
+                    // let floorMaterial = new THREE.MeshLambertMaterial({ color: 0x888888, opacity: 0.5, transparent: true });
+                    // // let floorMaterial = new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff, opacity: 0.5, transparent: true } );
+
 
                     if (Store.view.floorTexture === true) {
                         // const floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );

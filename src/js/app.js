@@ -267,21 +267,21 @@ objCenter.position.set(0, 3, -29);
 // https://gist.github.com/ErikPeterson/b1db23f83b9ca7904bbf
 // https://stackoverflow.com/questions/37884013/adding-video-as-texture-in-three-js/37892861
 
-const video = document.getElementById('human-keyboard-video');
-console.log(video);
-if (video != null) {
-    // // // video.src = "URL for your video file goes here";
-    // video.load();
-    // video.play();
+// const video = document.getElementById('human-keyboard-video');
+// console.log(video);
+// if (video != null) {
+//     // // // video.src = "URL for your video file goes here";
+//     // video.load();
+//     // video.play();
 
-    // const videoTexture = new THREE.VideoTexture(video);
-    // const videoMaterial = new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
-    // const screenGeo = new THREE.BoxGeometry(20, 30, 2);
-    // // const screenGeo = new THREE.PlaneGeometry(1, 1, 0);
-    // const videoScreen = new THREE.Mesh(screenGeo, videoMaterial);
-    // videoScreen.position.set(-3, -8, -31);
-    // Store.scene.add(videoScreen);
-}
+//     // const videoTexture = new THREE.VideoTexture(video);
+//     // const videoMaterial = new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
+//     // const screenGeo = new THREE.BoxGeometry(20, 30, 2);
+//     // // const screenGeo = new THREE.PlaneGeometry(1, 1, 0);
+//     // const videoScreen = new THREE.Mesh(screenGeo, videoMaterial);
+//     // videoScreen.position.set(-3, -8, -31);
+//     // Store.scene.add(videoScreen);
+// }
 
 // https://github.com/hawksley/Threex.chromakey
 // // chroma blue: #0022F5
@@ -709,7 +709,9 @@ function onSelect() {
         console.log('Store.reticle: ', Store.reticle);
         Store.view.posDropMatrix = Store.reticle.matrix;
 
-        greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
+        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5);
+        greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_full.mp4", 0x0022F5);
+
         // const videoMaterial = new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
         const cylinderMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
 
@@ -723,7 +725,7 @@ function onSelect() {
         console.log('PRE cylinderMesh.position: ', cylinderMesh.position);
 
         // // cylinderMesh.scale.y = Math.random() * 2 + 1;
-        Store.scene.add(cylinderMesh);
+        // Store.scene.add(cylinderMesh);
 
         // https://threejs.org/docs/#api/en/math/Vector3
         // bundle.js:19 cylinderMesh.position:  t {x: -0.8785914778709412, y: -0.8584758639335632, z: -1.0065946578979492, isVector3: true}
@@ -774,18 +776,17 @@ function onSelect() {
         cannonBody.position.set(...cannonPosArr);
         // cannonBody.position.setFromMatrixPosition(Store.reticle.matrix); // ERR: cannonBody.position.setFromMatrixPosition is not a function
         
-        cannonBody.addShape(cannonShape);
-        // Store.world.add(cannonBody);
-        cannonBody.threemesh = cylinderMesh;
-
-        // size: 0.8, 1, 0.01
-        
         setTimeout(() => {
+            Store.scene.add(cylinderMesh);
+            cannonBody.addShape(cannonShape);
+            cannonBody.threemesh = cylinderMesh;
             greenScreenMaterial.startVideo();
+            greenScreenMaterial.update();
         }, 3000);
+        // }, 12000);
         
         // console.log('onSelect -> greenScreenVideoObject: ', greenScreenVideoObject);
-        greenScreenMaterial.update();
+        // greenScreenMaterial.update();
 
         console.log('onSelect -> Store: ', Store);
     }

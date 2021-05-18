@@ -28,6 +28,7 @@ THREEx.ChromaKeyMaterial = function (url, keyColor) {
     };
 
     this.update = function () {
+        // console.log('update -> this: ', this);
         if (video.readyState === video.HAVE_ENOUGH_DATA) {
             // videoImageContext.drawImage(video, 0, 0);
             if (videoTexture) {
