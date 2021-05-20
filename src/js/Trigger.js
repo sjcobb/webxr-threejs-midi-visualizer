@@ -575,7 +575,7 @@ const recordingPart = new Tone.Part(function(time, datum){
 console.log('pre-start -> recordingPart', recordingPart);
 // recordingPart.start(0);
 // recordingPart.start(6);
-recordingPart.start(10);
+recordingPart.start(8);
 
 const recordingSecondPart = new Tone.Part(function(time, datum){
     // console.log(time);
