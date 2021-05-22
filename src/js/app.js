@@ -757,7 +757,12 @@ function onSelect() {
         console.log({greenScreenSize});
         // physics.initGroundContactMaterial(reticleCurrentPosition, greenScreenSize); // TODO: instead of adding ground, add Cannon material to video mesh
 
-        physics.initGroundContactMaterial([0, -1, -29], [30, 60, 0.5]);
+        // physics.initGroundContactMaterial([0, -1, -29], [30, 60, 0.5]); // prev
+        // physics.initGroundContactMaterial([0, -4, -40], [30, 60, 0.5]); // too low
+        physics.initGroundContactMaterial([0, 3, -40], [30, 60, 0.5]); // first bounce
+        // physics.initGroundContactMaterial([2, -9, -25], [10, 20, 0.25]); // too small
+
+        physics.initGroundContactMaterial([0, -20, 0], [30, 200, 0.5]); // second bounce
 
         // const cannonPosArr = [0, Store.view.posLandY, -29];
         const cannonPosArr = reticleCurrentPosition;
@@ -789,6 +794,7 @@ function onSelect() {
         setTimeout(() => {
             greenScreenMaterial.startVideo();
         }, 6000);
+        // }, 0);
         
         // console.log('onSelect -> greenScreenVideoObject: ', greenScreenVideoObject);
         greenScreenMaterial.update();

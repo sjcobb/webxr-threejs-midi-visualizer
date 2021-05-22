@@ -43,6 +43,8 @@ export default class Physics {
         // this.initGroundContactMaterial([0, Store.view.posLandY, -29], [18, 6, 0.5]); // first bounce
         // // this.initGroundContactMaterial([0, -12.5, -12], [18, 30, 0.5]); // 2nd bounce
 
+        // this.initGroundContactMaterial([0, -30, -12], [100, 150, 0.5]);
+
         // this.initGroundContactMaterial([0, -5, -29], [30, 60, 0.5]);
         // this.initGroundContactMaterial([0, -1, -29], [30, 60, 0.5]);
 
@@ -87,7 +89,10 @@ export default class Physics {
 
         // groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2); //PREV
         // groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -1.50); // -Math.PI / 2 === -1.57
-        groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -1.40);
+        groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -1.20); // HERE
+
+        // groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0.3, -0.1), -0.85); // too tilted
+        // groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -0.2);
 
         // // groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0.5, 0, 0), -Math.PI / 2); // invisible giant hill
         // // groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0.5, 0, 0), -Math.PI / 2);
@@ -145,19 +150,21 @@ export default class Physics {
                 // console.log(options.duration);
 
                 // // const maxDuration = 2.5; // too bouncy
-                const maxDuration = 1.7;
+                // const maxDuration = 1.7; // prev
+                const maxDuration = 1.5;
                 const minDuration = 0.50;
 
                 // options.duration = options.duration < minDuration ? minDuration : options.duration;
                 options.duration = options.duration > maxDuration ? maxDuration : options.duration;
                 // console.log(options.duration);
 
-                // sphereRestitution = options.duration * 0.60; // too high
-                sphereRestitution = options.duration * 0.50; 
-                // const minRestitution = 0.125;
-                const minRestitution = 0.285;
+                // sphereRestitution = options.duration * 0.50; // prev
+                sphereRestitution = options.duration * 0.1;
+
+                const minRestitution = 0;
+                // const minRestitution = 0.285;
                 sphereRestitution = sphereRestitution < minRestitution ? minRestitution : sphereRestitution;
-                // console.log({sphereRestitution});
+                console.log({sphereRestitution});
             }
         }
         const material = new CANNON.Material({ restitution: sphereRestitution, friction: 1 }); 
@@ -165,7 +172,8 @@ export default class Physics {
         // https://schteppe.github.io/cannon.js/docs/classes/Body.html
         // const body = new CANNON.Body({ mass: 5, material: material }); // v0.3, v0.4
         // const body = new CANNON.Body({ mass: 550, material: material }); // genmusic
-        const body = new CANNON.Body({ mass: 5000, material: material }); 
+        // const body = new CANNON.Body({ mass: 5000, material: material }); // prev
+        const body = new CANNON.Body({ mass: 50, material: material }); 
 
         this.shapes = {};
         this.shapes.sphere = new CANNON.Sphere(objSize);
@@ -178,12 +186,14 @@ export default class Physics {
         }
 
         let xPos = xPosition; //TODO: remove xPosition param if not used
-        xPos = (xPosition + 5);
+        // xPos = (xPosition + 5);
+        xPos = (xPosition + 4);
+        // xPos = (xPosition - 1);
         
         const yPos = Store.view.posDropY; // 30
 
-        // let zPos = (options.originalPosition.z - 30); // prev
-        let zPos = (options.originalPosition.z - 35);
+        // let zPos = (options.originalPosition.z - 35); // prev
+        let zPos = (options.originalPosition.z - 30);
 
         body.position.set((sphere) ? -xPos : xPos, yPos, zPos);
 

@@ -29,6 +29,7 @@
 ## Research
 
 - how to play 1 minute long video? 
+  - after exporting from Resolve use: https://www.onlineconverter.com/compress-video
   - node fs.createReadStream
     - https://www.geeksforgeeks.org/how-to-stream-large-mp4-files/
     - https://betterprogramming.pub/video-stream-with-node-js-and-html5-320b3191a6b6

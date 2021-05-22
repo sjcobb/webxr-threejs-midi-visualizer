@@ -540,13 +540,11 @@ const recordingPart = new Tone.Part(function(time, datum){
     // TODO: how to projection map keyboard video so it creates illusion of being in-line with rotated dropped note spheres
 
     // instrMapped.originalPosition.z = (instrMapped.posIndex * 0.9); // prev
-    // instrMapped.originalPosition.z = (instrMapped.posIndex * 0.5); // worse
-    instrMapped.originalPosition.z = (instrMapped.posIndex * 1.1); // better
-    // instrMapped.originalPosition.z = (instrMapped.posIndex * 2.25); // bad
+    instrMapped.originalPosition.z = (instrMapped.posIndex / 3.5);
+    // instrMapped.originalPosition.z = (instrMapped.posIndex / 5); // too far right
 
-    // nstrMapped.originalPosition.x = (instrMapped.negIndex / 6); // prev
-    // instrMapped.originalPosition.x = (instrMapped.negIndex / 4); // better
-    instrMapped.originalPosition.x = (instrMapped.negIndex / 3); // better
+    // instrMapped.originalPosition.x = (instrMapped.negIndex / 10); // too close together
+    instrMapped.originalPosition.x = (instrMapped.negIndex / 7.5);
     // instrMapped.originalPosition.x = (instrMapped.negIndex / 2); // bad
 
     instrMapped.duration = datum.duration
@@ -573,9 +571,8 @@ const recordingPart = new Tone.Part(function(time, datum){
 // recordingPart.start("0:5:0");
 // recordingPart.start("0:0:0");
 console.log('pre-start -> recordingPart', recordingPart);
-// recordingPart.start(0);
-// recordingPart.start(6);
-recordingPart.start(8);
+// recordingPart.start(1);
+recordingPart.start(7);
 
 const recordingSecondPart = new Tone.Part(function(time, datum){
     // console.log(time);
