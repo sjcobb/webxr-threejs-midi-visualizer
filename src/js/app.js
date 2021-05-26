@@ -709,12 +709,14 @@ function onSelect() {
         console.log('Store.reticle: ', Store.reticle);
         Store.view.posDropMatrix = Store.reticle.matrix;
 
-        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-short.mp4", 0x0022F5); // bluescreen
-        greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-03.mp4", 0x0022F5); // bluescreen
-        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5); // works
-        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short_copy.mp4", 0x0022F5); // bluescreen, works
-        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short_02.mp4", 0x0022F5); // bluescreen
-        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x00b140); // greenscreen
+        // // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-short.mp4", 0x0022F5); // bluescreen
+        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-03.mp4", 0x0022F5); // bluescreen
+        greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-04.mp4", 0x0022F5); // bluescreen
+
+        // // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5); // works
+        // // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short_copy.mp4", 0x0022F5); // bluescreen, works
+        // // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short_02.mp4", 0x0022F5); // bluescreen
+        // // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x00b140); // greenscreen
 
         // const videoMaterial = new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
         const cylinderMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );

@@ -539,12 +539,16 @@ const recordingPart = new Tone.Part(function(time, datum){
     // TODO: how to calculate ratio of x to y, to rotate piano key positions relative to origin (A0, midi 21), aka move clock-wise
     // TODO: how to projection map keyboard video so it creates illusion of being in-line with rotated dropped note spheres
 
-    // instrMapped.originalPosition.z = (instrMapped.posIndex * 0.9); // prev
-    instrMapped.originalPosition.z = (instrMapped.posIndex / 3.5);
+    // instrMapped.originalPosition.z = (instrMapped.posIndex * 0.9);
+    // instrMapped.originalPosition.z = (instrMapped.posIndex / 3.5); // PREV
+    // instrMapped.originalPosition.z = (instrMapped.posIndex / 2.5); // too far left
+    instrMapped.originalPosition.z = (instrMapped.posIndex / 2.6);
     // instrMapped.originalPosition.z = (instrMapped.posIndex / 5); // too far right
 
     // instrMapped.originalPosition.x = (instrMapped.negIndex / 10); // too close together
-    instrMapped.originalPosition.x = (instrMapped.negIndex / 7.5);
+    // instrMapped.originalPosition.x = (instrMapped.negIndex / 7.5); // PREV
+    instrMapped.originalPosition.x = (instrMapped.negIndex / 7.0);
+    // instrMapped.originalPosition.x = (instrMapped.negIndex / 6.5); // too far apart
     // instrMapped.originalPosition.x = (instrMapped.negIndex / 2); // bad
 
     instrMapped.duration = datum.duration
@@ -572,7 +576,12 @@ const recordingPart = new Tone.Part(function(time, datum){
 // recordingPart.start("0:0:0");
 console.log('pre-start -> recordingPart', recordingPart);
 // recordingPart.start(1);
-recordingPart.start(7);
+// recordingPart.start(7); // prev blue-human-03
+// recordingPart.start(11.85); // blue-human-04 - balls drop too early
+recordingPart.start(11.87);
+// recordingPart.start(11.90); // balls drop little late
+// recordingPart.start(12.00); // balls drop little late
+// recordingPart.start(12.10); // balls drop too late
 
 const recordingSecondPart = new Tone.Part(function(time, datum){
     // console.log(time);

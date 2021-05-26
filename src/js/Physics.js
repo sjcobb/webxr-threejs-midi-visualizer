@@ -127,9 +127,11 @@ export default class Physics {
         if (objSize === 'xl') {
             objSize = 2.0;
         } else {
-            // objSize = 0.38; // PREV
-            // objSize = 0.1;
-            objSize = 0.07;
+            // objSize = 0.38; // jazz-hands
+            // objSize = 0.07; // PREV
+            objSize = 0.10;
+            // objSize = 0.15;  // little too big
+            // objSize = 0.2 // too big, balls collide
         }
 
         // console.log('addBody -> options: ', options);
@@ -167,13 +169,15 @@ export default class Physics {
                 console.log({sphereRestitution});
             }
         }
-        const material = new CANNON.Material({ restitution: sphereRestitution, friction: 1 }); 
+        // const material = new CANNON.Material({ restitution: sphereRestitution, friction: 1 }); // PREV
+        const material = new CANNON.Material({ restitution: sphereRestitution, friction: 100 }); 
 
         // https://schteppe.github.io/cannon.js/docs/classes/Body.html
         // const body = new CANNON.Body({ mass: 5, material: material }); // v0.3, v0.4
         // const body = new CANNON.Body({ mass: 550, material: material }); // genmusic
-        // const body = new CANNON.Body({ mass: 5000, material: material }); // prev
-        const body = new CANNON.Body({ mass: 50, material: material }); 
+        // const body = new CANNON.Body({ mass: 5000, material: material }); 
+        // const body = new CANNON.Body({ mass: 50, material: material }); // PREV
+        const body = new CANNON.Body({ mass: 1000, material: material });
 
         this.shapes = {};
         this.shapes.sphere = new CANNON.Sphere(objSize);
@@ -187,13 +191,18 @@ export default class Physics {
 
         let xPos = xPosition; //TODO: remove xPosition param if not used
         // xPos = (xPosition + 5);
-        xPos = (xPosition + 4);
+        // xPos = (xPosition + 4); // PREV
+        xPos = (xPosition + 4.5);
+        // xPos = (xPosition + 7); // too far left
         // xPos = (xPosition - 1);
         
-        const yPos = Store.view.posDropY; // 30
+        let yPos = Store.view.posDropY; // 30
+        yPos = 15;
 
-        // let zPos = (options.originalPosition.z - 35); // prev
-        let zPos = (options.originalPosition.z - 30);
+        // let zPos = (options.originalPosition.z - 35);
+        // let zPos = (options.originalPosition.z - 30); // PREV
+        // let zPos = (options.originalPosition.z - 33); // too far back
+        let zPos = (options.originalPosition.z - 32);
 
         body.position.set((sphere) ? -xPos : xPos, yPos, zPos);
 
@@ -212,6 +221,8 @@ export default class Physics {
         
         // body.angularVelocity.z = 24; // for sideways spin
         // body.angularVelocity.x = 24; // USE
+        // body.angularVelocity.z = -10; // no effect
+        // body.angularVelocity.x = -10; // no effect
 
         if (options.type === 'animation') {
             flamePhysics.create({x: -xPos});
@@ -219,6 +230,7 @@ export default class Physics {
             return;
         }
         
+        console.log({body});
         Store.world.add(body);
 
         body.userData = {
@@ -387,7 +399,8 @@ export default class Physics {
                     mesh = new THREE.Mesh(sphereGeo, poolBallMaterial); //prev: material
                     
                     // TODO: add configurable height / size
-                    mesh.scale.set(1.35, 1.35, 1.35);
+                    // mesh.scale.set(1.35, 1.35, 1.35); // PREV
+                    mesh.scale.set(2.60, 2.60, 2.60);
                     break;
 
                 case CANNON.Shape.types.PARTICLE:

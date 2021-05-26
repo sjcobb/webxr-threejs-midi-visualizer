@@ -214,7 +214,7 @@ export default {
         // posDropX: -2500,
         posDropX: undefined,
         // posDropY: 30,
-        posDropY: 15,
+        posDropY: undefined,
         posDropZ: -30,
 
         posDropMatrix: null,
