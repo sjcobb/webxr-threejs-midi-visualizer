@@ -2,17 +2,18 @@
 
 // import Store from './Store.js';
 
-var THREEx = THREEx || {};
+// const THREEx = THREEx || {};
+// const THREEx = {};
 
-THREEx.ChromaKeyMaterial = function (url, keyColor) {
-    THREE.ShaderMaterial.call(this);
+export function ChromaKeyMaterial(url, keyColor) {
+    // this.prototype = Object.create(THREE.ShaderMaterial.prototype);
+    // THREE.ShaderMaterial.call(this);
 
-    video = document.createElement('video');
+    const video = document.createElement('video');
     video.src = url;
     video.load();
     video.muted = true;
     console.log(video);
-    console.log('video.readyState: ', video.readyState);
 
     var keyColorObject = new THREE.Color(keyColor);
 
@@ -20,29 +21,20 @@ THREEx.ChromaKeyMaterial = function (url, keyColor) {
     videoTexture.minFilter = THREE.LinearFilter;
     videoTexture.magFilter = THREE.LinearFilter;
 
-    this.startVideo = function () {
+    startVideo = function () {
         console.log('startVideo() -> this: ', this);
-        console.log('startVideo() -> video: ', video);
-        console.log('startVideo() -> video.readyState: ', video.readyState);
-        THREEx.readyState = video.readyState;
         video.play();
     };
 
-    this.stopVideo = function () {
+    stopVideo = function () {
         video.pause();
         video.src = "";
     };
 
-    this.update = function () {
+    update = function () {
         // console.log('update -> this: ', this);
         if (video.readyState === video.HAVE_ENOUGH_DATA) {
             // videoImageContext.drawImage(video, 0, 0);
-
-            if (THREEx.readyState !== 4) {
-                console.log('startVideo() -> video.readyState: ', video.readyState);
-                THREEx.readyState = video.readyState;
-            }
-
             if (videoTexture) {
                 videoTexture.needsUpdate = true;
                 // console.log(videoTexture);
@@ -52,7 +44,7 @@ THREEx.ChromaKeyMaterial = function (url, keyColor) {
         // TODO: if video.readyState === 4, start recording
     };
 
-    this.setValues({
+    setValues({
         // https://stackoverflow.com/a/64731616/7639084
         uniforms: {
             textureUni: {
@@ -84,7 +76,12 @@ THREEx.ChromaKeyMaterial = function (url, keyColor) {
             "}",
         transparent: true
     });
+
+    // this.prototype = Object.create(THREE.ShaderMaterial.prototype);
 };
 
 // https://threejs.org/docs/#api/en/materials/ShaderMaterial
-THREEx.ChromaKeyMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype);
+// THREEx.ChromaKeyMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype);
+// const ChromaKeyMaterial = THREEx.ChromaKeyMaterial;
+// export default THREEx.ChromaKeyMaterial;
+// export default ChromaKeyMaterial;

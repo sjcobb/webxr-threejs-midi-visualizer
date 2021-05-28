@@ -129,7 +129,7 @@ export default class Physics {
         } else {
             // objSize = 0.38; // jazz-hands
             // objSize = 0.07; // PREV
-            objSize = 0.10;
+            objSize = 0.09;
             // objSize = 0.15;  // little too big
             // objSize = 0.2 // too big, balls collide
         }
@@ -166,7 +166,7 @@ export default class Physics {
                 const minRestitution = 0;
                 // const minRestitution = 0.285;
                 sphereRestitution = sphereRestitution < minRestitution ? minRestitution : sphereRestitution;
-                console.log({sphereRestitution});
+                // console.log({sphereRestitution});
             }
         }
         // const material = new CANNON.Material({ restitution: sphereRestitution, friction: 1 }); // PREV
@@ -191,18 +191,21 @@ export default class Physics {
 
         let xPos = xPosition; //TODO: remove xPosition param if not used
         // xPos = (xPosition + 5);
-        // xPos = (xPosition + 4); // PREV
-        xPos = (xPosition + 4.5);
+        // xPos = (xPosition + 3); // too far right
+        xPos = (xPosition + 3.25);
+        // xPos = (xPosition + 3.5);  // slightly too far left
+        // xPos = (xPosition + 4.5); // PREV
         // xPos = (xPosition + 7); // too far left
         // xPos = (xPosition - 1);
         
         let yPos = Store.view.posDropY; // 30
         yPos = 15;
 
-        // let zPos = (options.originalPosition.z - 35);
-        // let zPos = (options.originalPosition.z - 30); // PREV
-        // let zPos = (options.originalPosition.z - 33); // too far back
-        let zPos = (options.originalPosition.z - 32);
+        // let zPos = (options.originalPosition.z - 32); // prev, too far back
+        // let zPos = (options.originalPosition.z - 26); 
+        // let zPos = (options.originalPosition.z - 24); // tiny bit too far back
+        let zPos = (options.originalPosition.z - 23); 
+        // let zPos = (options.originalPosition.z - 22); // too close
 
         body.position.set((sphere) ? -xPos : xPos, yPos, zPos);
 
@@ -230,7 +233,7 @@ export default class Physics {
             return;
         }
         
-        console.log({body});
+        // console.log({body});
         Store.world.add(body);
 
         body.userData = {
@@ -400,7 +403,7 @@ export default class Physics {
                     
                     // TODO: add configurable height / size
                     // mesh.scale.set(1.35, 1.35, 1.35); // PREV
-                    mesh.scale.set(2.60, 2.60, 2.60);
+                    mesh.scale.set(2.55, 2.55, 2.55);
                     break;
 
                 case CANNON.Shape.types.PARTICLE:

@@ -20,6 +20,8 @@ const config = {
             path.resolve(__dirname, 'src/js/FireShader.js'),
             path.resolve(__dirname, 'src/js/Store.js'),
             path.resolve(__dirname, 'src/js/Helpers.js'),
+            // path.resolve(__dirname, 'src/js/Threex_chrom.js'),
+            path.resolve(__dirname, 'src/js/ChromaKey.js'),
             path.resolve(__dirname, 'src/js/Trigger.js'),
             path.resolve(__dirname, 'src/js/Pool.js'),
             path.resolve(__dirname, 'src/js/Threex.js'),

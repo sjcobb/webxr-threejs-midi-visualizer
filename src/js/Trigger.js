@@ -302,7 +302,7 @@ playerKick.volume.value = +2;
 //     fadeOut: 0
 // }
 
-console.log({playerKick});
+// console.log({playerKick});
 // input: AudioParam {value: 1, automationRate: "a-rate", defaultValue: 1, minValue: -3.4028234663852886e+38, maxValue: 3.4028234663852886e+38}
 
 const playerCrash = new Player("./assets/samples/drum-kits/hiphop/clap.mp3").toMaster(); //hand clap echo
@@ -520,7 +520,8 @@ Store.recording.parts[1] = recordingSecondNotes.tracks[0].notes;
 // console.log({recordingNotes});
 // console.log('Store.recording: ', Store.recording);
 
-const recordingPart = new Tone.Part(function(time, datum){
+// const recordingPart = new Tone.Part(function(time, datum){
+Store.recordingPart = new Tone.Part(function(time, datum){
     // console.log(time);
     // console.log(datum);
 
@@ -540,14 +541,15 @@ const recordingPart = new Tone.Part(function(time, datum){
     // TODO: how to projection map keyboard video so it creates illusion of being in-line with rotated dropped note spheres
 
     // instrMapped.originalPosition.z = (instrMapped.posIndex * 0.9);
-    // instrMapped.originalPosition.z = (instrMapped.posIndex / 3.5); // PREV
+    // instrMapped.originalPosition.z = (instrMapped.posIndex / 3.5);
     // instrMapped.originalPosition.z = (instrMapped.posIndex / 2.5); // too far left
-    instrMapped.originalPosition.z = (instrMapped.posIndex / 2.6);
+    // instrMapped.originalPosition.z = (instrMapped.posIndex / 2.6); // PREV
+    instrMapped.originalPosition.z = (instrMapped.posIndex / 4.5);
     // instrMapped.originalPosition.z = (instrMapped.posIndex / 5); // too far right
 
     // instrMapped.originalPosition.x = (instrMapped.negIndex / 10); // too close together
-    // instrMapped.originalPosition.x = (instrMapped.negIndex / 7.5); // PREV
-    instrMapped.originalPosition.x = (instrMapped.negIndex / 7.0);
+    instrMapped.originalPosition.x = (instrMapped.negIndex / 9.0);
+    // instrMapped.originalPosition.x = (instrMapped.negIndex / 7.0); // too far apart
     // instrMapped.originalPosition.x = (instrMapped.negIndex / 6.5); // too far apart
     // instrMapped.originalPosition.x = (instrMapped.negIndex / 2); // bad
 
@@ -558,7 +560,7 @@ const recordingPart = new Tone.Part(function(time, datum){
     // instrMapped.variation = 'violin';
     // instrMapped.variation = 'piano';
 
-    console.log(instrMapped.originalPosition);
+    // console.log(instrMapped.originalPosition);
     // physics.addBody(true, Store.view.posDropX, instrMapped, 0); // prev
     physics.addBody(true, instrMapped.originalPosition.x, instrMapped, 0); 
 
@@ -574,14 +576,19 @@ const recordingPart = new Tone.Part(function(time, datum){
 //recordingPart.playbackRate = 0.9;
 // recordingPart.start("0:5:0");
 // recordingPart.start("0:0:0");
-console.log('pre-start -> recordingPart', recordingPart);
+// console.log('pre-start -> recordingPart', recordingPart);
 // recordingPart.start(1);
 // recordingPart.start(7); // prev blue-human-03
 // recordingPart.start(11.85); // blue-human-04 - balls drop too early
-recordingPart.start(11.87);
+// recordingPart.start(11.87); // working
+// // Store.recordingPart.start(11.87);
 // recordingPart.start(11.90); // balls drop little late
 // recordingPart.start(12.00); // balls drop little late
 // recordingPart.start(12.10); // balls drop too late
+
+// Store.recordingPart.start(2); // slightly too early
+Store.recordingPart.start(2.4);
+// Store.recordingPart.start(2.5); // slightly too late
 
 const recordingSecondPart = new Tone.Part(function(time, datum){
     // console.log(time);

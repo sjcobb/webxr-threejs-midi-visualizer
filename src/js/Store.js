@@ -169,6 +169,8 @@ export default {
         //     notes: [],
         // },
     },
+    recordingPart: null,
+    recordingStarted: false,
     // renderer: new THREE.WebGLRenderer(),
     renderer: new THREE.WebGLRenderer({ alpha: true, antialias: true }),
     reticle: null,
@@ -230,7 +232,7 @@ export default {
         reticleSelected: false,
 
         rotateOrigin: true,
-        songAutoStart: true,
+        songAutoStart: false,
         showDashboard: false,
         showHitMarker: true,
         showLogoSprite: false,

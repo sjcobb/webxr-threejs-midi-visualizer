@@ -2,6 +2,9 @@
 
 ## XR - Human mesh video
 
+- [ ] sync start time of VideoTexture and recording.start 
+- [ ] move THREEx.ChromaKeyMaterial to src/js and import correctly
+- [ ] move video mesh down in scene
 - [x] balls need to be coupled to reticle piano placement
 - [x] balls scale should match indiv key hit
 - [ ] balls should drop from top right angled spawn point
@@ -28,6 +31,9 @@
 
 ## Research
 
+- sync start time of VideoTexture and recording.start 
+  - https://stackoverflow.com/a/35787870/7639084
+  - video.readyState === 4 // means read to play
 - how to play 1 minute long video? 
   - after exporting from Resolve use: https://www.onlineconverter.com/compress-video
   - node fs.createReadStream

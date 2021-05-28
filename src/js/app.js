@@ -1,14 +1,18 @@
 import Tone from 'Tone';
 // import * as THREE from 'three';
 import Stats from 'stats.js';
-import { ARButton } from './ARButton.js';
+import { ARButton } from './ARButton';
 
-import Store from './Store.js';
-import InstrumentMappings from './InstrumentMappings.js';
-import { getInstrumentMappingTemplate, generateInstrMetadata, getInstrByInputNote } from './InstrumentMappings.js';
-import { FlyControls } from 'three/examples/jsm/controls/FlyControls.js';
-import Light from './Light.js';
-import Physics from './Physics.js';
+import Store from './Store';
+import InstrumentMappings from './InstrumentMappings';
+import { getInstrumentMappingTemplate, generateInstrMetadata, getInstrByInputNote } from './InstrumentMappings';
+import { FlyControls } from 'three/examples/jsm/controls/FlyControls';
+import Light from './Light';
+import Physics from './Physics';
+
+// import { ChromaKeyMaterial } from './Threex_chrom';
+import { ChromaKeyMaterial } from './ChromaKey';
+console.log({ChromaKeyMaterial});
 
 import Recording from './Recording.js';
 // import * as recordingFirstNotes from '../../assets/recording/1.json'
@@ -267,21 +271,21 @@ objCenter.position.set(0, 3, -29);
 // https://gist.github.com/ErikPeterson/b1db23f83b9ca7904bbf
 // https://stackoverflow.com/questions/37884013/adding-video-as-texture-in-three-js/37892861
 
-const video = document.getElementById('human-keyboard-video');
-console.log(video);
-if (video != null) {
-    // // // video.src = "URL for your video file goes here";
-    // video.load();
-    // video.play();
+// const video = document.getElementById('human-keyboard-video');
+// console.log(video);
+// if (video != null) {
+//     // // // video.src = "URL for your video file goes here";
+//     // video.load();
+//     // video.play();
 
-    // const videoTexture = new THREE.VideoTexture(video);
-    // const videoMaterial = new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
-    // const screenGeo = new THREE.BoxGeometry(20, 30, 2);
-    // // const screenGeo = new THREE.PlaneGeometry(1, 1, 0);
-    // const videoScreen = new THREE.Mesh(screenGeo, videoMaterial);
-    // videoScreen.position.set(-3, -8, -31);
-    // Store.scene.add(videoScreen);
-}
+//     // const videoTexture = new THREE.VideoTexture(video);
+//     // const videoMaterial = new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
+//     // const screenGeo = new THREE.BoxGeometry(20, 30, 2);
+//     // // const screenGeo = new THREE.PlaneGeometry(1, 1, 0);
+//     // const videoScreen = new THREE.Mesh(screenGeo, videoMaterial);
+//     // videoScreen.position.set(-3, -8, -31);
+//     // Store.scene.add(videoScreen);
+// }
 
 // https://github.com/hawksley/Threex.chromakey
 // // chroma blue: #0022F5
@@ -418,7 +422,18 @@ let animate = () => {
     }
     
     if (greenScreenMaterial) {
-        greenScreenMaterial.update();
+
+        // if (Store.recordingStarted === false && THREEx.readyState === 4) {
+        if (Store.recordingStarted === false) {
+            Store.recordingStarted = true;
+            // Store.recordingPart.start();
+            Tone.Transport.start();
+
+            greenScreenMaterial.startVideo();
+        } else {
+            greenScreenMaterial.update();
+        }
+        // greenScreenMaterial.update();
     }
 
     physics.updateBodies(Store.world);
@@ -713,10 +728,18 @@ function onSelect() {
         // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-03.mp4", 0x0022F5); // bluescreen
         greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-04.mp4", 0x0022F5); // bluescreen
 
+        // // chromaKeyMaterial = new ChromaKeyMaterial("assets/human/blue-human-04.mp4", 0x0022F5); // bluescreen
+        // chromaKeyMaterial = new ChromaKeyMaterial(); // bluescreen
+        // // chromaKeyMaterial.init();
+        // // chromaKeyMaterial.setValues();
+        // console.log({chromaKeyMaterial});
+
         // // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x0022F5); // works
         // // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short_copy.mp4", 0x0022F5); // bluescreen, works
         // // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short_02.mp4", 0x0022F5); // bluescreen
         // // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue_human_short.mp4", 0x00b140); // greenscreen
+
+        console.log({greenScreenMaterial});
 
         // const videoMaterial = new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
         const cylinderMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
@@ -726,7 +749,8 @@ function onSelect() {
         // cylinderMesh.position.setFromMatrixPosition(Store.reticle.matrix);
         
         // cylinderMesh.position.set(0, -5, -29); // video too high, too far back, slightly too far left
-        cylinderMesh.position.set(2, -6, -29);
+        // cylinderMesh.position.set(2, -6, -29); // prev, video too high
+        cylinderMesh.position.set(2, -10, -29);
         
         console.log('PRE cylinderMesh.position: ', cylinderMesh.position);
 
@@ -756,7 +780,7 @@ function onSelect() {
         // greenScreenVideoObject.position.setY(Store.reticle.position.y);
         // greenScreenVideoObject.position.setZ(Store.reticle.position.z);
 
-        console.log({greenScreenSize});
+        // console.log({greenScreenSize});
         // physics.initGroundContactMaterial(reticleCurrentPosition, greenScreenSize); // TODO: instead of adding ground, add Cannon material to video mesh
 
         // physics.initGroundContactMaterial([0, -1, -29], [30, 60, 0.5]); // prev
@@ -793,9 +817,13 @@ function onSelect() {
 
         // size: 0.8, 1, 0.01
         
-        setTimeout(() => {
-            greenScreenMaterial.startVideo();
-        }, 6000);
+        // setTimeout(() => {
+        //     console.log(THREEx);
+        //     console.log(THREEx.readyState);
+        //     greenScreenMaterial.startVideo();
+
+        //     // console.log(THREEx);
+        // }, 6000);
         // }, 0);
         
         // console.log('onSelect -> greenScreenVideoObject: ', greenScreenVideoObject);
