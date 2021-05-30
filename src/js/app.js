@@ -724,9 +724,10 @@ function onSelect() {
         console.log('Store.reticle: ', Store.reticle);
         Store.view.posDropMatrix = Store.reticle.matrix;
 
-        // // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-short.mp4", 0x0022F5); // bluescreen
-        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-03.mp4", 0x0022F5); // bluescreen
-        greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-04.mp4", 0x0022F5); // bluescreen
+        // // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-short.mp4", 0x0022F5);
+        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-03.mp4", 0x0022F5);
+        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-04.mp4", 0x0022F5); // prev, bluescreen
+        greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-05.mp4", 0x0022F5); // bluescreen full
 
         // // chromaKeyMaterial = new ChromaKeyMaterial("assets/human/blue-human-04.mp4", 0x0022F5); // bluescreen
         // chromaKeyMaterial = new ChromaKeyMaterial(); // bluescreen
