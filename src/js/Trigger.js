@@ -587,7 +587,8 @@ Store.recordingPart = new Tone.Part(function(time, datum){
 // recordingPart.start(12.10); // balls drop too late
 
 // Store.recordingPart.start(2); // slightly too early
-Store.recordingPart.start(2.4);
+// Store.recordingPart.start(2.4); // PREV, very slightly too late
+Store.recordingPart.start(2.3); 
 // Store.recordingPart.start(2.5); // slightly too late
 
 const recordingSecondPart = new Tone.Part(function(time, datum){

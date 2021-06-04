@@ -602,7 +602,8 @@ if (Store.view.showHitMarker === true) {
         new THREE.MeshBasicMaterial({
             // color: 'blue',
             // color: 0x888888,
-            color: 0x000000,
+            color: 0x989898,
+            // color: 0x000000,
             side: THREE.DoubleSide,
         }),
     );
