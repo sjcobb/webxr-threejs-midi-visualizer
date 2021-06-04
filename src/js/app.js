@@ -131,7 +131,7 @@ Store.renderer.domElement.id = 'canvas-scene-primary';
 
 // update viewport on resize
 window.addEventListener('resize', function() {
-    var width = window.innerWidth + 2;
+    var width = window.innerWidth;
     var height = window.innerHeight;
     Store.renderer.setSize(width, height);
     Store.camera.aspect = width / height; // aspect ratio
@@ -724,10 +724,8 @@ function onSelect() {
         console.log('Store.reticle: ', Store.reticle);
         Store.view.posDropMatrix = Store.reticle.matrix;
 
-        // // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-short.mp4", 0x0022F5);
-        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-03.mp4", 0x0022F5);
-        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-04.mp4", 0x0022F5); // prev, bluescreen
-        greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-05.mp4", 0x0022F5); // bluescreen full
+        // greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-05.mp4", 0x0022F5); 
+        greenScreenMaterial = new THREEx.ChromaKeyMaterial("assets/human/blue-human-07.mp4", 0x0022F5); // bluescreen full
 
         // // chromaKeyMaterial = new ChromaKeyMaterial("assets/human/blue-human-04.mp4", 0x0022F5); // bluescreen
         // chromaKeyMaterial = new ChromaKeyMaterial(); // bluescreen
@@ -857,3 +855,13 @@ function addARObjectAt(matrix) {
 // CONSOLE ERROR TEST
 // const errorElement = document.getElementById('undef-id');
 // errorElement.innerHTML = '...';
+
+// // //
+
+setTimeout(() => {
+    var width = window.innerWidth;
+    var height = window.innerHeight + 20;
+    Store.renderer.setSize(width, height);
+    Store.camera.aspect = width / height; // aspect ratio
+    Store.camera.updateProjectionMatrix();
+}, 6000);

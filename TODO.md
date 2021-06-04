@@ -2,6 +2,10 @@
 
 ## XR - Human mesh video
 
+- [ ] fix balls too far apart
+- [ ] after init call resize with += 20px 
+- [ ] add portal tracked above keyboard
+
 - [ ] sync start time of VideoTexture and recording.start 
 - [ ] move THREEx.ChromaKeyMaterial to src/js and import correctly
 - [ ] move video mesh down in scene
