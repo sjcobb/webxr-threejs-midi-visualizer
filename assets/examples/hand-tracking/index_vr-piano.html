@@ -1,0 +1,165 @@
+<html class="a-fullscreen">
+
+<head>
+    <title>VR Piano</title>
+    <meta name="description" content="TBD WebXR Game">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.74/Tone.js"></script>
+    <script
+        src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
+    <script
+        src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+
+    <script src="./src/piano.js"></script>
+    <script src="./src/pressable.js"></script>
+    <script src="./src/teleport.js"></script>
+    <script src="./src/hand-tracking.js"></script>
+    <script src="./src/hand-tracking-gestures.js"></script>
+
+</head>
+
+<body>
+    <a-scene background="color: pink" webxr="optionalFeatures: hand-tracking" raycaster="objects: .collidable"
+        cursor="rayOrigin:mouse; fuse:false" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui=""
+        device-orientation-permission-ui="" fog="">
+
+        <a-entity environment="preset: tron; dressing: 0" visible="">
+            <a-entity class="environment" position="" light="" visible=""></a-entity>
+            <a-entity class="environment" position="" light="" visible=""></a-entity>
+            <a-entity rotation="" class="environmentGround environment" visible="" scale="" shadow=""></a-entity>
+            <a-entity class="environmentDressing environment" visible=""></a-entity>
+            <a-sky radius="200" theta-length="110" class="environment" material="" visible="" geometry="" scale="">
+            </a-sky>
+        </a-entity>
+        <a-entity piano="" position="0 0 -.25">
+            <a-entity gltf-model="" id="piano_model"></a-entity>
+            <a-entity id="keys_container" position="" layout="">
+                <a-box geometry="" material="" data-note="C2" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="C#2" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="D2" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="D#2" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="E2" pressable="" class="collidable" animation=""></a-box>
+                <a-box geometry="" material="" data-note="F2" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="F#2" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="G2" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="G#2" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="A2" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="A#2" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="B2" pressable="" class="collidable" animation=""></a-box>
+                <a-box geometry="" material="" data-note="C3" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="C#3" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="D3" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="D#3" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="E3" pressable="" class="collidable" animation=""></a-box>
+                <a-box geometry="" material="" data-note="F3" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="F#3" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="G3" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="G#3" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="A3" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="A#3" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="B3" pressable="" class="collidable" animation=""></a-box>
+                <a-box geometry="" material="" data-note="C4" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="C#4" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="D4" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="D#4" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="E4" pressable="" class="collidable" animation=""></a-box>
+                <a-box geometry="" material="" data-note="F4" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="F#4" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="G4" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="G#4" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="A4" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="A#4" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="B4" pressable="" class="collidable" animation=""></a-box>
+                <a-box geometry="" material="" data-note="C5" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="C#5" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="D5" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="D#5" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="E5" pressable="" class="collidable" animation=""></a-box>
+                <a-box geometry="" material="" data-note="F5" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="F#5" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="G5" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="G#5" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="A5" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="A#5" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="B5" pressable="" class="collidable" animation=""></a-box>
+                <a-box geometry="" material="" data-note="C6" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="C#6" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="D6" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="D#6" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="E6" pressable="" class="collidable" animation=""></a-box>
+                <a-box geometry="" material="" data-note="F6" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="F#6" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="G6" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="G#6" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="A6" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="A#6" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="B6" pressable="" class="collidable" animation=""></a-box>
+                <a-box geometry="" material="" data-note="C7" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="C#7" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="D7" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="D#7" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="E7" pressable="" class="collidable" animation=""></a-box>
+                <a-box geometry="" material="" data-note="F7" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="F#7" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="G7" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="G#7" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="A7" pressable="" class="collidable" animation="">
+                    <a-box geometry="" material="" position="" data-note="A#7" class="collidable"></a-box>
+                </a-box>
+                <a-box geometry="" material="" data-note="B7" pressable="" class="collidable" animation=""></a-box>
+            </a-entity>
+        </a-entity>
+
+        <a-entity id="cameraRig">
+            <a-entity id="head" camera="" position="0 1 0" wasd-controls="acceleration: 10" look-controls=""
+                rotation=""></a-entity>
+
+            <a-entity class="hand" hand-tracking="hand: left" hand-tracking-gestures=""></a-entity>
+            <a-entity class="hand" hand-tracking="hand: right" hand-tracking-gestures=""></a-entity>
+
+            <!-- <a-entity laser-controls="hand: left" hand-tracking-mesh="hand: left" hand-tracking-gestures-mesh teleport teleport-controls="startEvents: teleportstart; endEvents: teleportend; cameraRig: #cameraRig; teleportOrigin: #head;" raycaster="objects: .collidable; far: 0.2" line="color: #000000"></a-entity> -->
+            <!-- <a-entity laser-controls="hand: right" hand-tracking-mesh="hand: right" hand-tracking-gestures-mesh teleport teleport-controls="startEvents: teleportstart; endEvents: teleportend; cameraRig: #cameraRig; teleportOrigin: #head;" raycaster="objects: .collidable; far: 0.2" line="color: #000000"></a-entity> -->
+        </a-entity>
+
+        <canvas class="a-canvas a-grab-cursor" data-aframe-canvas="true" width="1920" height="166"></canvas>
+        <div class="a-loader-title" style="display: none;">VR Piano</div>
+        <div class="a-enter-vr" aframe-injected=""><button class="a-enter-vr-button"
+                title="Enter VR mode with a headset or fullscreen mode on a desktop. Visit https://webvr.rocks or https://webvr.info for more information."
+                aframe-injected=""></button></div>
+        <div class="a-enter-ar a-hidden" aframe-injected=""><button class="a-enter-ar-button"
+                title="Enter AR mode with a headset or handheld device. Visit https://webvr.rocks or https://webvr.info for more information."
+                aframe-injected=""></button></div>
+        <div class="a-orientation-modal a-hidden" aframe-injected=""><button aframe-injected="">Exit VR</button></div>
+    </a-scene>
+</body>
+
+</html>
